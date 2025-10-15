@@ -1,6 +1,6 @@
 import biker from "@/assets/home/biker.jpeg";
 import gadgets from "@/assets/home/Gadgets.jpeg";
-import homeAppliances from "@/assets/home/HomeAppliance.jpeg";
+import homeAppliances from "@/assets/home/homeAppliance.jpeg";
 import laptop from "@/assets/home/Laptop.jpeg";
 import survailance from "@/assets/home/survailance.jpeg";
 

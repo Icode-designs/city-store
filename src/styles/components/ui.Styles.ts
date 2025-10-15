@@ -84,6 +84,7 @@ export const CustomButton = styled.button<{
   transition: all ease 0.5s;
   border-radius: var(--border-radius);
   font-weight: var(--bold);
+  text-transform: capitalize;
 
   ${({ $variant }) =>
     $variant === "extended" &&
@@ -156,7 +157,7 @@ export const ProductSection = styled.section<{ $variant?: string }>`
 
     &:nth-of-type(2) {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(${pxTorem(250)}, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(${pxTorem(150)}, 1fr));
       grid-gap: ${pxTorem(32)};
       background-color: var(--col-100);
       border-bottom-right-radius: var(--border-radius);
@@ -177,6 +178,31 @@ export const ProductCard = styled.div<{ $variant?: string }>`
   cursor: pointer;
   padding: ${pxTorem(16)};
   grid-gap: ${pxTorem(16)};
+  height: 100%;
+  position: relative;
+
+  a {
+    align-self: end;
+  }
+
+  .favourite {
+    position: absolute;
+    top: ${pxTorem(24)};
+    right: ${pxTorem(24)};
+    border-radius: 50%;
+    padding: ${pxTorem(8)};
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+
+    svg {
+      font-size: ${pxTorem(28)};
+    }
+
+    &:hover {
+      background-color: rgba(253, 0, 0, 0.3);
+    }
+  }
 
   img {
     width: 100%;
@@ -188,7 +214,7 @@ export const ProductCard = styled.div<{ $variant?: string }>`
   article {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: ${pxTorem(10)};
+    grid-gap: auto;
 
     ${({ $variant }) =>
       $variant === "categories" &&
