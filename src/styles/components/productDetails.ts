@@ -5,24 +5,24 @@ import QUERY from "../mediaBreakpoints";
 
 export const ProductImgBox = styled.div`
   padding: ${pxTorem(16)};
-  display: grid;
+  display: flex;
   width: 100%;
-  grid-template-columns: 1fr;
-  grid-gap: ${pxTorem(16)};
   max-width: ${pxTorem(483)};
+  gap: ${pxTorem(16)};
 
   img {
-    width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    width: 70%;
   }
 
   > div {
-    display: flex;
-    align-items: center;
-    gap: ${pxTorem(10)};
+    display: grid;
+    max-width: ${pxTorem(95)};
+    grid-template-columns: 1fr;
 
     div {
       width: 100%;
+      height: fit-content;
       max-width: ${pxTorem(95)};
       cursor: pointer;
       &.active {
@@ -71,14 +71,18 @@ export const ProductInfoBox = styled.article`
 `;
 
 export const ProductOverviewBox = styled.section`
-  padding: 0 ${pxTorem(32)};
+  padding: 0 ${pxTorem(16)};
   @media ${QUERY.TABLET} {
+    padding: 0 ${pxTorem(24)};
+  }
+  @media ${QUERY.DESKTOP} {
     padding: 0 ${pxTorem(40)};
   }
 `;
 
 export const ProductSpecs = styled.div`
   width: 100%;
+  flex: 1;
 
   > div {
     &:nth-of-type(1) {
@@ -92,7 +96,7 @@ export const ProductSpecs = styled.div`
     &:nth-of-type(2) {
       overflow-x: hidden;
       position: relative;
-      min-height: 80px;
+      height: fit-content;
 
       * {
         width: 100%;
@@ -102,6 +106,7 @@ export const ProductSpecs = styled.div`
 `;
 
 export const TabButton = styled.button<{ $active?: boolean }>`
+  width: fit-contentx;
   text-transform: capitalize;
   font-size: ${pxTorem(20)};
   font-weight: ${({ $active }) => ($active ? "var(--bold)" : "400")};
@@ -118,7 +123,7 @@ export const AnimatedContent = styled.div`
   position: relative;
   overflow: hidden;
   height: ${pxTorem(400)};
-  padding: ${pxTorem(32)} ${pxTorem(16)};
+  padding: ${pxTorem(32)} 0;
 
   > div {
     width: 100%;
@@ -132,6 +137,82 @@ export const AnimatedContent = styled.div`
   }
 `;
 
-export const ProductReview = styled.div`
-  width: 100%;
+export const AnimatedRating = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: ${pxTorem(400)};
+  padding: ${pxTorem(32)} 0;
+
+  > div {
+    width: 100%;
+  }
+
+  ul {
+    height: ${pxTorem(150)};
+    progress {
+      width: 100%;
+      height: 10px;
+      appearance: none;
+      -webkit-appearance: none;
+      overflow: hidden;
+      border: none;
+      border-radius: var(--border-radius);
+
+      &::-webkit-progress-bar {
+        background-color: #eeee;
+        border-radius: var(--border-radius);
+      }
+
+      &::-webkit-progress-value {
+        background-color: var(--col-400);
+        border-radius: var(--border-radius);
+      }
+
+      &::-moz-progress-bar {
+        background-color: var(--col-400);
+        border-radius: var(--border-radius);
+      }
+    }
+  }
+`;
+
+export const CustomerReviews = styled.div`
+  height: ${pxTorem(150)};
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: ${pxTorem(24)};
+  overflow-y: scroll;
+  align-items: start;
+
+  article {
+    display: block;
+    > ul {
+      display: flex;
+      width: 100%;
+      gap: ${pxTorem(8)};
+      height: fit-content;
+
+      li {
+        width: fit-content !important;
+      }
+    }
+  }
+`;
+
+export const ReviewInputBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: ${pxTorem(16)};
+  > div {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  textarea {
+    width: 100%;
+    height: ${pxTorem(150)};
+    border-radius: var(--border-radius);
+    border: var(--col-400) ${pxTorem(1)} solid;
+    padding: ${pxTorem(16)};
+  }
 `;

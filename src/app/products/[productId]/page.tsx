@@ -1,30 +1,50 @@
 "use client";
 import ProductDetails from "@/components/ProductDetails";
 import ProductOverview from "@/components/ProductOverview";
-import { MainContainer } from "@/styles/components/ui.Styles";
-import { PRODUCTS } from "@/utils/data";
-import React, { useEffect, useState } from "react";
+import RelatedProducts from "@/components/RelatedProducts";
+import { MainContainer, ProductSection } from "@/styles/components/ui.Styles";
+import PRODUCT from "@/types/productsType";
+import getProductById from "@/utils/getProduct";
+
+import React, { use, useEffect, useState } from "react";
+
+interface STATETYPE {
+  error: null | string;
+  loading: false;
+  product: null | PRODUCT;
+}
 
 const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
   const [activeImage, setActiveImage] = useState(0);
-  const [product, setProduct] = useState<(typeof PRODUCTS)[0] | null>(null);
-  const resolvedParams = React.use(params);
+  const [productState, setProductState] = useState<STATETYPE>({
+    error: null,
+    loading: false,
+    product: null,
+  });
+  const resolvedParams = use(params);
   const id = resolvedParams.productId;
 
   useEffect(() => {
-    setProduct(PRODUCTS.find((p) => p.id === id) || null);
+    async function getProducts() {
+      const product = await getProductById(id);
+      setProductState((prev) => ({ ...prev, product }));
+    }
+    getProducts();
   }, [id]);
 
-  if (!product) return <p>Loading...</p>;
+  if (productState.error) return <p>An error occurred: {productState.error}</p>;
+  if (productState.loading) return <p>Loading product data...</p>;
+  if (!productState.product) return <p>Product not found.</p>;
 
   return (
     <MainContainer $variant="secondary">
       <ProductOverview
-        product={product}
+        product={productState.product as PRODUCT}
         activeImage={activeImage}
         setActiveImage={setActiveImage}
       />
-      <ProductDetails product={product} />
+      <ProductDetails product={productState.product as PRODUCT} />
+      <RelatedProducts id={id} />
     </MainContainer>
   );
 };

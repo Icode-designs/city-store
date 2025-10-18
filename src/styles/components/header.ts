@@ -21,39 +21,41 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
     margin: var(--centered);
     height: fit-content;
     padding: 0 ${pxTorem(16)};
-    gap: ${pxTorem(32)};
+    gap: ${pxTorem(24)};
 
-    > button {
-      background: none;
-      height: fit-content;
-      border: none;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: ${pxTorem(5)};
-      div {
-        width: ${pxTorem(25)};
-        height: ${pxTorem(3)};
-        background-color: var(--col-000);
-        transition: all 0.3s ease;
+    .menu {
+      > button {
+        background: none;
+        height: fit-content;
+        border: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: ${pxTorem(5)};
+        div {
+          width: ${pxTorem(25)};
+          height: ${pxTorem(3)};
+          background-color: var(--col-000);
+          transition: all 0.3s ease;
 
-        &:nth-of-type(2) {
-          transform: translateX(25%);
-          display: ${({ $navOpen }) => ($navOpen ? "none" : "block")};
-        }
-        &:nth-of-type(1) {
-          transform: ${({ $navOpen }) =>
-            $navOpen ? "rotate(-45deg) translateY(5px)" : "0"};
-        }
-        &:nth-of-type(3) {
-          transform: ${({ $navOpen }) =>
-            $navOpen ? "rotate(45deg)  translateY(-5px)" : "0"};
+          &:nth-of-type(2) {
+            transform: translateX(25%);
+            display: ${({ $navOpen }) => ($navOpen ? "none" : "block")};
+          }
+          &:nth-of-type(1) {
+            transform: ${({ $navOpen }) =>
+              $navOpen ? "rotate(-45deg) translateY(5px)" : "0"};
+          }
+          &:nth-of-type(3) {
+            transform: ${({ $navOpen }) =>
+              $navOpen ? "rotate(45deg)  translateY(-5px)" : "0"};
+          }
         }
       }
     }
 
     nav {
       position: absolute;
-      top: ${pxTorem(83.19)};
+      top: ${pxTorem(81.19)};
       right: ${({ $navOpen }) => ($navOpen ? "0" : "-100%")};
       padding: ${pxTorem(40)};
       background-color: var(--col-100);

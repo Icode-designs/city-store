@@ -37,11 +37,13 @@ export const LogoBox = styled.div`
     font-family: var(--font-italianno);
     font-size: ${pxTorem(32)};
     font-weight: var(--regular);
+    line-height: 0.8;
   }
 `;
 
 export const StyledSearchBar = styled.div`
   width: 100%;
+  max-width: ${pxTorem(600)};
   position: relative;
   display: flex;
   align-items: center;
@@ -52,7 +54,7 @@ export const StyledSearchBar = styled.div`
     width: 100%;
     height: ${pxTorem(50)};
     padding: ${pxTorem(16)} ${pxTorem(16)};
-    padding-right: ${pxTorem(85)};
+    padding-right: ${pxTorem(95)};
   }
 
   input:focus {
@@ -66,6 +68,7 @@ export const StyledSearchBar = styled.div`
     bottom: ${pxTorem(5)};
     font-size: ${pxTorem(16)};
     color: var(--col-100);
+    height: 80%;
   }
 `;
 
@@ -75,7 +78,7 @@ export const CustomButton = styled.button<{
   background-color: var(--col-400);
   color: var(--col-100);
   border: none;
-  padding: ${pxTorem(12)} ${pxTorem(16)};
+  padding: ${pxTorem(16)};
   width: fit-content;
   height: fit-content;
   display: flex;
@@ -157,11 +160,14 @@ export const ProductSection = styled.section<{ $variant?: string }>`
 
     &:nth-of-type(2) {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(${pxTorem(150)}, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(${pxTorem(140)}, 1fr));
       grid-gap: ${pxTorem(32)};
       background-color: var(--col-100);
       border-bottom-right-radius: var(--border-radius);
       border-bottom-left-radius: var(--border-radius);
+      @media ${QUERY.TABLET} {
+        grid-template-columns: repeat(auto-fill, minmax(${pxTorem(200)}, 1fr));
+      }
     }
   }
 
@@ -176,19 +182,22 @@ export const ProductCard = styled.div<{ $variant?: string }>`
   grid-template-columns: 1fr;
   transition: all ease 0.5s;
   cursor: pointer;
-  padding: ${pxTorem(16)};
+  padding: ${pxTorem(16)} 0;
   grid-gap: ${pxTorem(16)};
   height: 100%;
   position: relative;
+  justify-items: center;
 
   a {
     align-self: end;
+    width: 100%;
+    padding: 0 ${pxTorem(8)};
   }
 
   .favourite {
     position: absolute;
-    top: ${pxTorem(24)};
-    right: ${pxTorem(24)};
+    top: ${pxTorem(8)};
+    right: ${pxTorem(8)};
     border-radius: 50%;
     padding: ${pxTorem(8)};
     display: flex;
@@ -206,7 +215,7 @@ export const ProductCard = styled.div<{ $variant?: string }>`
 
   img {
     width: 100%;
-    height: ${pxTorem(300)};
+    height: ${pxTorem(205)};
     object-fit: contain;
     object-position: center;
   }
@@ -215,6 +224,7 @@ export const ProductCard = styled.div<{ $variant?: string }>`
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: auto;
+    padding: 0 ${pxTorem(8)};
 
     ${({ $variant }) =>
       $variant === "categories" &&

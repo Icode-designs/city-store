@@ -6,7 +6,8 @@ const Logo = () => {
   return (
     <LogoBox>
       <Link href="/">
-        <p>City Store</p>{" "}
+        <p>Next Door</p>
+        <p>Xpress</p>{" "}
       </Link>
     </LogoBox>
   );

@@ -7,6 +7,7 @@ export const FooterContainer = styled.footer`
   background-color: var(--col-200);
   color: var(--col-100);
   text-align: center;
+  padding: ${pxTorem(16)};
 
   > div:nth-of-type(1) {
     display: grid;
@@ -99,5 +100,44 @@ export const Copyright = styled.div`
   padding: ${pxTorem(16)};
   p {
     font-size: inherit;
+  }
+`;
+
+export const NewsLetterBox = styled.section`
+  display: flex;
+  background-color: var(--col-200-light);
+  color: var(--col-100);
+  text-align: center;
+  padding: ${pxTorem(50)} ${pxTorem(16)};
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+
+  article {
+    text-align: center;
+    color: var(--col-100);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: ${pxTorem(24)};
+    max-width: ${pxTorem(400)};
+    justify-items: center;
+
+    > div:nth-of-type(1) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: ${pxTorem(8)};
+    }
+
+    > div:nth-of-type(2) {
+      width: 100%;
+      input {
+        height: fit-content;
+        padding: ${pxTorem(16)};
+        outline: none;
+        border-radius: var(--border-radius);
+        border: none;
+        width: 100%;
+      }
+    }
   }
 `;

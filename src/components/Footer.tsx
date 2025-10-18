@@ -11,7 +11,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaGooglePlay } from "react-icons/fa";
 import { FaAppStore } from "react-icons/fa";
 import { FaRegCopyright } from "react-icons/fa";
-import Logo from "./ui/Logo";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (

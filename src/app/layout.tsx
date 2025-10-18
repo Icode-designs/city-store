@@ -4,6 +4,8 @@ import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyle from "@/styles/global.styles";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProductsContextProvider from "@/providers/productsProvider";
+import NewsLetter from "@/components/NewsLetter";
 
 const italianno = Italianno({
   variable: "--font-italiano",
@@ -35,7 +37,8 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <GlobalStyle />
           <Header />
-          {children}
+          <ProductsContextProvider>{children}</ProductsContextProvider>
+          <NewsLetter />
           <Footer />
         </StyledComponentsRegistry>
       </body>

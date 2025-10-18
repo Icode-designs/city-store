@@ -1,13 +1,17 @@
 "use client";
+import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 import { CustomButton, ProductSection } from "@/styles/components/ui.Styles";
-import formatNairaToUSD from "@/utils/formatPrice";
-import { numberToStars } from "@/utils/ratings";
-import Link from "next/link";
 import React, { useContext } from "react";
 import Card from "./Card";
-import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
+import Link from "next/link";
+import { numberToStars } from "@/utils/ratings";
+import formatNairaToUSD from "@/utils/formatPrice";
 
-const BestDeal = () => {
+interface PROPS {
+  id: string;
+}
+
+const RelatedProducts = ({ id }: PROPS) => {
   const productsCtx = useContext(PRODUCTS_CONTEXT);
 
   if (!productsCtx) {
@@ -15,23 +19,14 @@ const BestDeal = () => {
   }
 
   const { loading, products, error } = productsCtx;
-
+  const relatedProducts = products?.filter((item) => item.id === id);
   return (
-    <ProductSection $variant={undefined}>
+    <ProductSection>
+      <div>Related products</div>
       <div>
-        <h2>Best Deals</h2>
-        <span>
-          <p></p>
-        </span>
-      </div>
-      <div>
-        {loading && <p>Loading products...</p>}
-
-        {/* Error state */}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
-        {!error &&
-          !loading &&
-          products?.map((item, i) => (
+        {!loading &&
+          !error &&
+          relatedProducts?.map((item, i) => (
             <Card key={i}>
               <img src={item.image[0]} alt={item.title} />
               <article>
@@ -44,9 +39,16 @@ const BestDeal = () => {
               </Link>
             </Card>
           ))}
+
+        {error && (
+          <p>
+            an error occured please check your internet connection and try
+            again...
+          </p>
+        )}
       </div>
     </ProductSection>
   );
 };
 
-export default BestDeal;
+export default RelatedProducts;

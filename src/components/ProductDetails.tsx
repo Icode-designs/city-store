@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ProductReview,
   ProductSpecs,
   AnimatedContent,
   TabButton,
 } from "@/styles/components/productDetails";
 import { FlexBox } from "@/styles/components/ui.Styles";
 import { PRODUCTS } from "@/utils/data";
+import ProductReview from "./ProductReview";
 
 interface Props {
   product: (typeof PRODUCTS)[0];
@@ -37,7 +37,7 @@ const ProductDetails = ({ product }: Props) => {
 
   return (
     <section>
-      <FlexBox $gap={24} $variant="secondary">
+      <FlexBox $gap={40} $variant="secondary" $alignItems="flex-start">
         <ProductSpecs>
           {/* Tabs */}
           <FlexBox $gap={24}>
@@ -83,7 +83,7 @@ const ProductDetails = ({ product }: Props) => {
             </AnimatePresence>
           </AnimatedContent>
         </ProductSpecs>
-        <ProductReview />
+        <ProductReview product={product} />
       </FlexBox>
     </section>
   );

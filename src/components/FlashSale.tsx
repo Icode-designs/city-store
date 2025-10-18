@@ -1,20 +1,24 @@
 "use client";
-import {
-  CustomButton,
-  ProductCard,
-  ProductSection,
-} from "@/styles/components/ui.Styles";
-import { PRODUCTS } from "@/utils/data";
+import { CustomButton, ProductSection } from "@/styles/components/ui.Styles";
 import formatNairaToUSD from "@/utils/formatPrice";
 import { numberToStars } from "@/utils/ratings";
 import Link from "next/link";
-import React, { useState } from "react";
-import { FaHeart } from "react-icons/fa";
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import Card from "./ui/Card";
+import Card from "./Card";
+import { useContext } from "react";
+import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 
 const FlashSale = () => {
-  const products = PRODUCTS.filter((product, i) => i <= 7);
+  const productsCtx = useContext(PRODUCTS_CONTEXT);
+
+  if (!productsCtx) {
+    return;
+  }
+
+  const { loading, products, error } = productsCtx;
+  const saleProducts =
+    !loading && !error ? products?.filter((product, i) => i <= 7) : [];
+
+  console.log(saleProducts);
 
   return (
     <ProductSection $variant="flash-sale">
@@ -25,13 +29,17 @@ const FlashSale = () => {
         </span>
       </div>
       <div>
-        {products.map((item, i) => (
+        {loading && <p>Loading products...</p>}
+
+        {/* Error state */}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {saleProducts?.map((item, i) => (
           <Card key={i}>
             <img src={item.image[0]} alt={item.title} />
             <article>
-              <h3>{item.title}</h3>
+              <p>{item.title}</p>
               <p>{numberToStars(item.rating)}</p>
-              <p>{formatNairaToUSD(item.price)}</p>
+              <h3>{formatNairaToUSD(item.price)}</h3>
             </article>
             <Link href={`/products/${item.id}`}>
               <CustomButton $variant="extended">Add to cart</CustomButton>

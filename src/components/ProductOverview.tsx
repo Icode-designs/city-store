@@ -19,7 +19,6 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
     <ProductOverviewBox>
       <FlexBox $gap={50} $variant="secondary">
         <ProductImgBox>
-          <img src={product.image[activeImage]} alt={product.title} />
           <div>
             {product.image.map((image, i) => (
               <div
@@ -31,6 +30,7 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
               </div>
             ))}
           </div>
+          <img src={product.image[activeImage]} alt={product.title} />
         </ProductImgBox>
 
         <ProductInfoBox>
@@ -43,8 +43,8 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
           </FlexBox>
           <p>{product.description}</p>
           <FlexBox $gap={16}>
-            <CustomButton>Add to cart</CustomButton>
-            <CustomButton>Buy now</CustomButton>
+            <CustomButton $variant="extended">Add to cart</CustomButton>
+            <CustomButton $variant="extended">Buy now</CustomButton>
           </FlexBox>
         </ProductInfoBox>
       </FlexBox>

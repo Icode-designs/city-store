@@ -1,11 +1,13 @@
 "use client";
 import { HeroBox } from "@/styles/components/hompage.styles";
 import { CustomButton } from "@/styles/components/ui.Styles";
-import { HERO_IMAGE_URL } from "@/utils/data";
+import { HERO_IMAGE_URL, PRODUCTS } from "@/utils/data";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { motion } from "framer-motion";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebaseCl";
 
 const HomePageHero = () => {
   const [imageIndex, setImageIndex] = useState(0);

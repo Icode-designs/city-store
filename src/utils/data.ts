@@ -10,6 +10,7 @@ const PRODUCTS = [
   // ——— Phones ———
   {
     id: "phone1",
+    category: "phones",
     title: "Samsung Galaxy S25 Ultra",
     price: 2000000, // ₦2,000,000
     rating: { 5: 120, 4: 30, 3: 10, 2: 5, 1: 2 },
@@ -35,6 +36,7 @@ const PRODUCTS = [
   },
   {
     id: "phone2",
+    category: "phones",
     title: "Xiaomi 15 Ultra",
     price: 1800000,
     rating: { 5: 90, 4: 40, 3: 15, 2: 5, 1: 3 },
@@ -61,6 +63,7 @@ const PRODUCTS = [
   },
   {
     id: "phone3",
+    category: "phones",
     title: "Tecno Spark 20 Pro+",
     price: 350000,
     rating: { 5: 60, 4: 80, 3: 30, 2: 10, 1: 5 },
@@ -91,6 +94,7 @@ const PRODUCTS = [
   // ——— Home Appliances ———
   {
     id: "appliance1",
+    category: "home appliances",
     title: "LG 6kg Front-Load Washing Machine",
     price: 220000,
     rating: { 5: 45, 4: 20, 3: 8, 2: 3, 1: 1 },
@@ -121,6 +125,7 @@ const PRODUCTS = [
   },
   {
     id: "appliance2",
+    category: "home appliances",
     title: "Samsung 300L Double Door Refrigerator",
     price: 380000,
     rating: { 5: 70, 4: 25, 3: 10, 2: 4, 1: 2 },
@@ -143,14 +148,11 @@ const PRODUCTS = [
     ],
     image: [
       "https://images.samsung.com/is/image/samsung/p6pim/africa_en/rs57dg4000b4gh/gallery/africa-en-rs4000dc-side-by-side-with-large-capacity-rs57dg4000b4gh-544449726?$684_547_PNG$",
-      "https://images.samsung.com/is/image/samsung/p6pim/africa_en/rs57dg4000b4gh/gallery/africa-en-rs4000dc-side-by-side-with-large-capacity-rs57dg4000b4gh-544449714?$Q90_684_547_JPG$",
-      "https://images.samsung.com/is/image/samsung/p6pim/africa_en/rs57dg4000b4gh/gallery/africa-en-rs4000dc-side-by-side-with-large-capacity-rs57dg4000b4gh-544449715?$Q90_684_547_JPG$",
-      "https://images.samsung.com/is/image/samsung/p6pim/africa_en/rs57dg4000b4gh/gallery/africa-en-rs4000dc-side-by-side-with-large-capacity-rs57dg4000b4gh-544449717?$Q90_684_547_JPG$",
-      "https://images.samsung.com/is/image/samsung/p6pim/africa_en/rs57dg4000b4gh/gallery/africa-en-rs4000dc-side-by-side-with-large-capacity-rs57dg4000b4gh-544449711?$Q90_684_547_JPG$",
     ],
   },
   {
     id: "appliance3",
+    category: "home appliances",
     title: "Philips 1.5HP Split Air Conditioner",
     price: 185000,
     rating: { 5: 55, 4: 18, 3: 5, 2: 2, 1: 1 },
@@ -173,13 +175,13 @@ const PRODUCTS = [
     ],
     image: [
       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/5562092/1.jpg?5839",
-      "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/5562092/3.jpg?6169",
     ],
   },
 
   // ——— Surveillance ———
   {
     id: "surv1",
+    category: "surveillance",
     title: "Hikvision DS-2CD2143G0-I 4MP Bullet Camera",
     price: 45000,
     rating: { 5: 80, 4: 15, 3: 5, 2: 0, 1: 0 },
@@ -206,6 +208,7 @@ const PRODUCTS = [
   },
   {
     id: "surv2",
+    category: "surveillance",
     title: "Reolink Argus 3 Pro Wire-free Camera",
     price: 55000,
     rating: { 5: 60, 4: 25, 3: 8, 2: 2, 1: 0 },
@@ -234,6 +237,7 @@ const PRODUCTS = [
   // ——— Bicycles ———
   {
     id: "bike1",
+    category: "bikes",
     title: "Giant Escape 3 City Bike",
     price: 220000,
     rating: { 5: 35, 4: 12, 3: 5, 2: 1, 1: 0 },
@@ -256,6 +260,7 @@ const PRODUCTS = [
   },
   {
     id: "bike2",
+    category: "bikes",
     title: "Trek Marlin 7 Mountain Bike",
     price: 480000,
     rating: { 5: 65, 4: 20, 3: 7, 2: 2, 1: 1 },
@@ -284,6 +289,7 @@ const PRODUCTS = [
   // ——— Laptops & Tablets ———
   {
     id: "laptop1",
+    category: "laptops",
     title: 'Apple MacBook Air M2 13"',
     price: 1200000,
     rating: { 5: 150, 4: 20, 3: 5, 2: 2, 1: 1 },
@@ -303,11 +309,11 @@ const PRODUCTS = [
     ],
     image: [
       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/46/2679312/1.jpg?4011",
-      "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/46/2679312/2.jpg?4011",
     ],
   },
   {
     id: "laptop2",
+    category: "laptops",
     title: "Dell XPS 15 (2025)",
     price: 1500000,
     rating: { 5: 80, 4: 25, 3: 10, 2: 2, 1: 1 },
@@ -327,11 +333,11 @@ const PRODUCTS = [
     ],
     image: [
       "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=654&qlt=100,1&resMode=sharp2&size=654,402&chrss=full",
-      "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-black/notebook-xps-15-9530-t-black-gallery-4.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=677&qlt=100,1&resMode=sharp2&size=677,402&chrss=full",
     ],
   },
   {
     id: "tablet1",
+    category: "tablets",
     title: "Apple iPad Air (6th Gen)",
     price: 850000,
     rating: { 5: 110, 4: 30, 3: 7, 2: 2, 1: 1 },
@@ -361,6 +367,7 @@ const PRODUCTS = [
   // ——— Smart Watches ———
   {
     id: "watch1",
+    category: "smart watches",
     title: "Apple Watch Series 10",
     price: 780000,
     rating: { 5: 140, 4: 25, 3: 6, 2: 3, 1: 2 },
@@ -383,6 +390,7 @@ const PRODUCTS = [
   },
   {
     id: "watch2",
+    category: "smart watches",
     title: "Samsung Galaxy Watch 7",
     price: 650000,
     rating: { 5: 90, 4: 35, 3: 12, 2: 5, 1: 1 },

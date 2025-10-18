@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
   --col-000: #000000;
   --col-100: #ffffff;
   --col-200: #1D0E0E;
+  --col-200-light: #1d0e0ee1;
   --col-300: #FF2828;
   --col-400: #FF8001;
   --body-bg: #FFF0F0;
