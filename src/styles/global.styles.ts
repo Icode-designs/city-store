@@ -62,19 +62,19 @@ button:disable, input:disabled {
     opacity: 0.6;
 }
 h1{
-    font-size: ${pxTorem(40)};
+    font-size: clamp(${pxTorem(28)},${pxTorem(32)},${pxTorem(40)});
     font-weight: var(--extra-bold);
     line-height: 1.2;
     text-transform: capitalize;
 }
 h2{
-    font-size: ${pxTorem(28)};
+    font-size: clamp(${pxTorem(24)},${pxTorem(28)},${pxTorem(32)});
     font-weight: var(--bold);
     line-height: 1.3;
     text-transform: capitalize;
 }
 h3{
-    font-size: ${pxTorem(18)};
+    font-size: clamp(${pxTorem(16)},${pxTorem(18)},${pxTorem(24)});
     font-weight: var(--bold);
     line-height: 1.4;
     text-transform: capitalize;

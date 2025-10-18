@@ -25,23 +25,28 @@ const Header = () => {
         {!isTablet && <IoMdCart size={32} color="var(--col-000" />}
         <nav>
           <ul>
-            <li>
+            <li onClick={navOpen ? toggleNav : undefined}>
+              <Link href="/">
+                <p>Home</p>
+              </Link>
+            </li>
+            <li onClick={navOpen ? toggleNav : undefined}>
               <Link href="">
                 <p>New arrivals</p>
               </Link>
             </li>
-            <li>
+            <li onClick={navOpen ? toggleNav : undefined}>
               <Link href="">
                 <p> 5 stars</p>
               </Link>
             </li>
-            <li>
+            <li onClick={navOpen ? toggleNav : undefined}>
               <Link href="">
                 <p> Best Deals</p>
               </Link>
             </li>
             {!isTablet && (
-              <li>
+              <li onClick={navOpen ? toggleNav : undefined}>
                 <Link href="">
                   <p>Profile</p>
                 </Link>

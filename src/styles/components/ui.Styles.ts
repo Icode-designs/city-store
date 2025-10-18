@@ -54,7 +54,11 @@ export const StyledSearchBar = styled.div`
     width: 100%;
     height: ${pxTorem(50)};
     padding: ${pxTorem(16)} ${pxTorem(16)};
-    padding-right: ${pxTorem(95)};
+    padding-right: ${pxTorem(65)};
+
+    @media ${QUERY.TABLET} {
+      padding-right: ${pxTorem(95)};
+    }
   }
 
   input:focus {

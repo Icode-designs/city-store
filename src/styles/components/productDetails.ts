@@ -2,38 +2,56 @@
 import pxTorem from "@/utils/pxToRem";
 import styled from "styled-components";
 import QUERY from "../mediaBreakpoints";
+import { Query } from "firebase/firestore";
 
 export const ProductImgBox = styled.div`
-  padding: ${pxTorem(16)};
-  display: flex;
   width: 100%;
   max-width: ${pxTorem(483)};
   gap: ${pxTorem(16)};
 
-  img {
-    object-fit: cover;
-    width: 70%;
-  }
-
   > div {
-    display: grid;
-    max-width: ${pxTorem(95)};
-    grid-template-columns: 1fr;
-
-    div {
+    > img {
       width: 100%;
-      height: fit-content;
-      max-width: ${pxTorem(95)};
-      cursor: pointer;
-      &.active {
-        border: ${pxTorem(1)} solid var(--col-400);
-      }
+      object-fit: contain;
+      width: 70%;
+      order: 1;
+      height: ${pxTorem(347)};
+    }
+    > div {
+      display: flex;
+      gap: ${pxTorem(8)};
+      order: 2;
 
-      img {
-        width: 100%;
+      div {
+        width: ${pxTorem(100)};
+        height: ${pxTorem(100)};
+        max-width: ${pxTorem(95)};
+        cursor: pointer;
+        &.active {
+          border: ${pxTorem(1)} solid var(--col-400);
+        }
+
+        > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+
+    @media ${QUERY.TABLET} {
+      > div {
+        display: grid;
+        max-width: ${pxTorem(95)};
+        grid-template-columns: 1fr;
         height: fit-content;
-        object-fit: cover;
-        object-position: center;
+        grid-gap: ${pxTorem(8)};
+        align-items: start;
+        order: 1;
+      }
+      > img {
+        order: 2;
       }
     }
   }

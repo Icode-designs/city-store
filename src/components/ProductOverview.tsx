@@ -19,18 +19,20 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
     <ProductOverviewBox>
       <FlexBox $gap={50} $variant="secondary">
         <ProductImgBox>
-          <div>
-            {product.image.map((image, i) => (
-              <div
-                key={i}
-                onClick={() => setActiveImage(i)}
-                className={i === activeImage ? "active" : ""}
-              >
-                <img src={image} alt={product.title} />
-              </div>
-            ))}
-          </div>
-          <img src={product.image[activeImage]} alt={product.title} />
+          <FlexBox $gap={16} $variant="secondary">
+            <div>
+              {product.image.map((image, i) => (
+                <div
+                  key={i}
+                  onClick={() => setActiveImage(i)}
+                  className={i === activeImage ? "active" : ""}
+                >
+                  <img src={image} alt={product.title} />
+                </div>
+              ))}
+            </div>
+            <img src={product.image[activeImage]} alt={product.title} />
+          </FlexBox>
         </ProductImgBox>
 
         <ProductInfoBox>
