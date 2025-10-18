@@ -2,7 +2,7 @@
 import ProductDetails from "@/components/ProductDetails";
 import ProductOverview from "@/components/ProductOverview";
 import RelatedProducts from "@/components/RelatedProducts";
-import { MainContainer, ProductSection } from "@/styles/components/ui.Styles";
+import { MainContainer } from "@/styles/components/ui.Styles";
 import PRODUCT from "@/types/productsType";
 import getProductById from "@/utils/getProduct";
 

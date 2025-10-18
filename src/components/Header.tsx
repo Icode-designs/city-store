@@ -6,9 +6,9 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
 import { IoMdCart } from "react-icons/io";
 import SearchBar from "./SearchBar";
-import useMediaQuery from "@/hooks/useMedia";
 import { useState } from "react";
 import Logo from "./Logo";
+import useMediaQuery from "@/hooks/useMedia";
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
