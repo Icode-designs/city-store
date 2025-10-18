@@ -39,12 +39,11 @@ export const ProductImgBox = styled.div`
         }
       }
     }
-
     @media ${QUERY.TABLET} {
       > div {
         display: grid;
         max-width: ${pxTorem(95)};
-        grid-template-columns: 1fr;
+        grid-template-rows: repeat(auto-fill, minmax(${pxTorem(80)}, 1fr));
         height: fit-content;
         grid-gap: ${pxTorem(8)};
         align-items: start;
