@@ -1,13 +1,10 @@
 "use client";
 import { HeroBox } from "@/styles/components/hompage.styles";
 import { CustomButton } from "@/styles/components/ui.Styles";
-import { HERO_IMAGE_URL, PRODUCTS } from "@/utils/data";
-import Image from "next/image";
+import { HERO_IMAGE_URL } from "@/utils/data";
 import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { motion } from "framer-motion";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { db } from "@/lib/firebaseCl";
 
 const HomePageHero = () => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -17,9 +14,8 @@ const HomePageHero = () => {
       setImageIndex((prevIndex) =>
         prevIndex === HERO_IMAGE_URL.length - 1 ? 0 : prevIndex + 1
       );
-
-      return () => clearTimeout(timeOut);
-    }, 30000);
+    }, 5000);
+    return () => clearTimeout(timeOut);
   }, [imageIndex]);
 
   function handleClick(index: number) {
@@ -35,7 +31,7 @@ const HomePageHero = () => {
         animate={{ opacity: 1 }}
         initial={{ opacity: 0.5 }}
         exit={{ opacity: 0.5 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.3 }}
       />
       <article>
         <h1>Shop with ease</h1>

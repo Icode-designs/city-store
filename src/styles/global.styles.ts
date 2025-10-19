@@ -16,10 +16,10 @@ const GlobalStyle = createGlobalStyle`
   // Colors
   --col-000: #000000;
   --col-100: #ffffff;
-  --col-200: #1D0E0E;
-  --col-200-light: #1d0e0ee1;
+  --col-200: #6A00FF;
+  --col-200-light: #6A00FFe1;
   --col-300: #FF2828;
-  --col-400: #FF8001;
+  --col-400: #0099ffff;
   --body-bg: #FFF0F0;
 
     // Others
@@ -82,7 +82,7 @@ h3{
 p, li{
     font-size: ${pxTorem(16)};
     font-weight: var(--regular);
-    line-height: 1.6;
+    line-height: 1.4;
     opacity: 0.8;
 }
 `;

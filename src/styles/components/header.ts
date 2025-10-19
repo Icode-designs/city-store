@@ -113,3 +113,25 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
     }
   }
 `;
+
+export const SearchResultsBox = styled.ul`
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  top: ${pxTorem(82)};
+  left: 0;
+  right: 0;
+  padding: ${pxTorem(16)};
+  padding-top: ${pxTorem(24)};
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  background-color: var(--col-100);
+  max-width: var(--max-width);
+  margin: var(--centered);
+
+  li {
+    span {
+      font-weight: var(--bold);
+    }
+  }
+`;

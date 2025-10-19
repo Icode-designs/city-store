@@ -24,7 +24,7 @@ export const HeroBox = styled.div`
   }
 
   article {
-    max-width: ${pxTorem(390)};
+    max-width: ${pxTorem(450)};
     margin-top: ${pxTorem(135)};
     z-index: 5;
     text-align: center;

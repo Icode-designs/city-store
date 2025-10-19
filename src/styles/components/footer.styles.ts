@@ -4,7 +4,7 @@ import styled from "styled-components";
 import QUERY from "../mediaBreakpoints";
 
 export const FooterContainer = styled.footer`
-  background-color: var(--col-200);
+  background-color: var(--col-000);
   color: var(--col-100);
   text-align: center;
   padding: ${pxTorem(16)};
@@ -105,7 +105,7 @@ export const Copyright = styled.div`
 
 export const NewsLetterBox = styled.section`
   display: flex;
-  background-color: var(--col-200-light);
+  background-color: var(--col-000);
   color: var(--col-100);
   text-align: center;
   padding: ${pxTorem(50)} ${pxTorem(16)};

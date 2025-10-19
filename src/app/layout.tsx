@@ -36,8 +36,11 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <GlobalStyle />
-          <Header />
-          <ProductsContextProvider>{children}</ProductsContextProvider>
+
+          <ProductsContextProvider>
+            <Header />
+            {children}
+          </ProductsContextProvider>
           <NewsLetter />
           <Footer />
         </StyledComponentsRegistry>
