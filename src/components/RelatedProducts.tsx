@@ -1,6 +1,10 @@
 "use client";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
-import { CustomButton, ProductSection } from "@/styles/components/ui.Styles";
+import {
+  CustomButton,
+  ProductSection,
+  ProductsGrid,
+} from "@/styles/components/ui.Styles";
 import React, { useContext } from "react";
 import Card from "./Card";
 import Link from "next/link";
@@ -26,7 +30,7 @@ const RelatedProducts = ({ product }: PROPS) => {
   return (
     <ProductSection>
       <div>Related products</div>
-      <div>
+      <ProductsGrid>
         {!loading &&
           !error &&
           relatedProducts?.map((item, i) => (
@@ -49,7 +53,7 @@ const RelatedProducts = ({ product }: PROPS) => {
             again...
           </p>
         )}
-      </div>
+      </ProductsGrid>
     </ProductSection>
   );
 };
