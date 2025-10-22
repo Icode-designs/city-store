@@ -1,5 +1,9 @@
 "use client";
-import { CustomButton, ProductSection } from "@/styles/components/ui.Styles";
+import {
+  CustomButton,
+  ProductSection,
+  ProductsGrid,
+} from "@/styles/components/ui.Styles";
 import formatNairaToUSD from "@/utils/formatPrice";
 import { numberToStars } from "@/utils/ratings";
 import Link from "next/link";
@@ -24,7 +28,7 @@ const BestDeal = () => {
           <p></p>
         </span>
       </div>
-      <div>
+      <ProductsGrid>
         {loading && <p>Loading products...</p>}
 
         {/* Error state */}
@@ -33,18 +37,18 @@ const BestDeal = () => {
           !loading &&
           products?.map((item, i) => (
             <Card key={i}>
-              <img src={item.image[0]} alt={item.title} />
-              <article>
-                <p>{item.title}</p>
-                <p>{numberToStars(item.rating)}</p>
-                <h3>{formatNairaToUSD(item.price)}</h3>
-              </article>
-              <Link href={`/products/${item.id}`}>
-                <CustomButton $variant="extended">Add to cart</CustomButton>
+              <Link href={`/products/products-details/${item.id}`}>
+                <img src={item.image[0]} alt={item.title} />
+                <article>
+                  <p>{item.title}</p>
+                  <p>{numberToStars(item.rating)}</p>
+                  <h3>{formatNairaToUSD(item.price)}</h3>
+                </article>
               </Link>
+              <CustomButton $variant="extended">Add to cart</CustomButton>
             </Card>
           ))}
-      </div>
+      </ProductsGrid>
     </ProductSection>
   );
 };

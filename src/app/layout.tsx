@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductsContextProvider from "@/providers/productsProvider";
 import NewsLetter from "@/components/NewsLetter";
+import FilterContextProvider from "@/providers/filterProvider";
 
 const italianno = Italianno({
   variable: "--font-italiano",
@@ -38,8 +39,10 @@ export default function RootLayout({
           <GlobalStyle />
 
           <ProductsContextProvider>
-            <Header />
-            {children}
+            <FilterContextProvider>
+              <Header />
+              {children}
+            </FilterContextProvider>
           </ProductsContextProvider>
           <NewsLetter />
           <Footer />

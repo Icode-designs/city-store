@@ -161,18 +161,6 @@ export const ProductSection = styled.section<{ $variant?: string }>`
               background-color: var(--col-200);
             `}
     }
-
-    &:nth-of-type(2) {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(${pxTorem(140)}, 1fr));
-      grid-gap: ${pxTorem(32)};
-      background-color: var(--col-100);
-      border-bottom-right-radius: var(--border-radius);
-      border-bottom-left-radius: var(--border-radius);
-      @media ${QUERY.TABLET} {
-        grid-template-columns: repeat(auto-fill, minmax(${pxTorem(200)}, 1fr));
-      }
-    }
   }
 
   @media ${QUERY.DESKTOP} {
@@ -191,11 +179,15 @@ export const ProductCard = styled.div<{ $variant?: string }>`
   height: 100%;
   position: relative;
   justify-items: center;
+  padding: ${pxTorem(8)};
+
+  button {
+    align-self: end;
+    margin: 0 ${pxTorem(8)};
+  }
 
   a {
-    align-self: end;
     width: 100%;
-    padding: 0 ${pxTorem(8)};
   }
 
   .favourite {
@@ -241,5 +233,17 @@ export const ProductCard = styled.div<{ $variant?: string }>`
 
   &:hover {
     box-shadow: var(--shadow);
+  }
+`;
+
+export const ProductsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(${pxTorem(140)}, 1fr));
+  grid-gap: ${pxTorem(32)};
+  background-color: var(--col-100);
+  border-bottom-right-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+  @media ${QUERY.TABLET} {
+    grid-template-columns: repeat(auto-fill, minmax(${pxTorem(200)}, 1fr));
   }
 `;

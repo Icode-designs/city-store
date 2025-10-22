@@ -1,9 +1,8 @@
-import { ProductSection } from "@/styles/components/ui.Styles";
+import { ProductSection, ProductsGrid } from "@/styles/components/ui.Styles";
 import { CATEGORIES } from "@/utils/imageImport";
-import { object } from "framer-motion/client";
 import React from "react";
 import Card from "./Card";
-import Image from "next/image";
+import Link from "next/link";
 
 const Categories = () => {
   const categories = Object.entries(CATEGORIES);
@@ -12,16 +11,20 @@ const Categories = () => {
       <div>
         <h2>Categories</h2>
       </div>
-      <div>
+      <ProductsGrid>
         {categories.map(([name, image]) => (
           <Card variant="categories" key={name}>
-            <img src={image.src} alt={name} loading="lazy" />
-            <article>
-              <p>{name}</p>
-            </article>
+            <Link
+              href={`/products/products-list/categories/${name.toLowerCase()}`}
+            >
+              <img src={image.src} alt={name} loading="lazy" />
+              <article>
+                <p>{name}</p>
+              </article>
+            </Link>
           </Card>
         ))}
-      </div>
+      </ProductsGrid>
     </ProductSection>
   );
 };

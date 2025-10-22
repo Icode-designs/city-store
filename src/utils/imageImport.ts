@@ -11,9 +11,9 @@ export const CATEGORIES = {
   phones,
   televisions: smartTv,
   laptops,
-  watch: smartWatch,
+  "smart-watches": smartWatch,
   surveillance,
-  tablet,
-  bike,
-  Appliances: homeAppliances,
+  tablets: tablet,
+  bikes: bike,
+  "home-appliances": homeAppliances,
 };

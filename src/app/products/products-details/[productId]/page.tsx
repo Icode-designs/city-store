@@ -10,7 +10,7 @@ import React, { use, useEffect, useState } from "react";
 
 interface STATETYPE {
   error: null | string;
-  loading: false;
+  loading: boolean;
   product: null | PRODUCT;
 }
 
@@ -26,7 +26,15 @@ const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
 
   useEffect(() => {
     async function getProducts() {
+      setProductState((prev) => ({ ...prev, loading: true }));
       const product = await getProductById(id);
+      setProductState((prev) => ({ ...prev, loading: false }));
+      if (!product) {
+        setProductState((prev) => ({
+          ...prev,
+          error: "could not fetch product",
+        }));
+      }
       setProductState((prev) => ({ ...prev, product }));
     }
     getProducts();
@@ -44,7 +52,7 @@ const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
         setActiveImage={setActiveImage}
       />
       <ProductDetails product={productState.product as PRODUCT} />
-      <RelatedProducts id={id} />
+      <RelatedProducts product={productState.product as PRODUCT} />
     </MainContainer>
   );
 };

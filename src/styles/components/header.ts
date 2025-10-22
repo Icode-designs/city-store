@@ -114,8 +114,10 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
   }
 `;
 
-export const SearchResultsBox = styled.ul`
+export const SearchResultsBox = styled.div`
   position: absolute;
+  display: grid !important;
+  grid-gap: ${pxTorem(4)};
   width: 100%;
   height: fit-content;
   top: ${pxTorem(82)};
@@ -129,7 +131,8 @@ export const SearchResultsBox = styled.ul`
   max-width: var(--max-width);
   margin: var(--centered);
 
-  li {
+  a {
+    width: 100%;
     span {
       font-weight: var(--bold);
     }

@@ -1,19 +1,17 @@
 "use client";
+
 import { HeaderContainer, SearchResultsBox } from "@/styles/components/header";
-import {
-  CustomButton,
-  FlexBox,
-  StyledSearchBar,
-} from "@/styles/components/ui.Styles";
+import { FlexBox, StyledSearchBar } from "@/styles/components/ui.Styles";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
-import { IoMdCart, IoMdSearch } from "react-icons/io";
-import { useContext, useRef, useState } from "react";
+import { IoMdCart } from "react-icons/io";
+import { useCallback, useContext, useRef, useState } from "react";
 import Logo from "./Logo";
 import useMediaQuery from "@/hooks/useMedia";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 import PRODUCT from "@/types/productsType";
+import { FILTER_CONTEXT } from "@/providers/filterProvider";
 
 interface SearchProcess {
   isTyping: boolean;
@@ -30,69 +28,84 @@ const Header = () => {
   const productsCtx = useContext(PRODUCTS_CONTEXT);
   const isTablet = useMediaQuery(768);
   const isDesktop = useMediaQuery(1200);
+  const filterCtx = useContext(FILTER_CONTEXT);
 
-  if (!productsCtx) return;
-  const { loading, error, products } = productsCtx;
+  const handleChange = useCallback(() => {
+    if (!productsCtx?.products) return;
 
-  const toggleNav = () => {
-    setNavOpen((prev) => !prev);
-  };
-
-  if (error) {
-    return <p>an error occured check your internet connection and try again</p>;
-  }
-  if (loading) {
-    return <p>loading...</p>;
-  }
-
-  function handleChange() {
+    const { products } = productsCtx;
     const searchKeyword = inputRef.current?.value.trim().toLowerCase() || "";
-    if (!searchKeyword) return;
+
+    if (!searchKeyword) {
+      setSearchProcess({ isTyping: false, result: [] });
+      return;
+    }
 
     const searchResult =
-      products?.filter(
-        (prod) =>
-          prod.title.toLowerCase().includes(searchKeyword!.toLowerCase()) ||
-          prod.category.toLowerCase().includes(searchKeyword!.toLowerCase())
+      products.filter(({ title, category }) =>
+        [title, category].some((field) =>
+          field.toLowerCase().includes(searchKeyword)
+        )
       ) || [];
 
     setSearchProcess({ isTyping: true, result: searchResult });
+  }, [productsCtx]);
+
+  const handleBlur = useCallback(() => {
+    setTimeout(() => {
+      setSearchProcess((prev) => ({ ...prev, isTyping: false }));
+    }, 300);
+  }, []);
+
+  if (!productsCtx) {
+    return <p>Unable to load products context. Try refreshing the page.</p>;
   }
 
-  function handleBlur() {
-    setSearchProcess((prev) => ({ ...prev, isTyping: false }));
+  const { loading, error } = productsCtx;
+
+  if (error) {
+    return (
+      <p>An error occurred. Check your internet connection and try again.</p>
+    );
   }
+
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
+  // normal render
   return (
     <HeaderContainer $navOpen={navOpen}>
       <div>
         {isTablet && <Logo />}
-        {!isTablet && <IoMdCart size={32} color="var(--col-000" />}
+        {!isTablet && <IoMdCart size={32} color="var(--col-000)" />}
+
         <nav>
           <ul>
             {!isTablet && (
-              <li onClick={navOpen ? toggleNav : undefined}>
+              <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
                 <Link href="/">
                   <p>Home</p>
                 </Link>
               </li>
             )}
-            <li onClick={navOpen ? toggleNav : undefined}>
+            <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
               <Link href="">
                 <p>New arrivals</p>
               </Link>
             </li>
-            <li onClick={navOpen ? toggleNav : undefined}>
+            <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
               <Link href="">
-                <p> 5 stars</p>
+                <p>5 stars</p>
               </Link>
             </li>
-            <li onClick={navOpen ? toggleNav : undefined}>
+            <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
               <Link href="">
-                <p> Best Deals</p>
+                <p>Best Deals</p>
               </Link>
             </li>
             {!isTablet && (
-              <li onClick={navOpen ? toggleNav : undefined}>
+              <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
                 <Link href="">
                   <p>Profile</p>
                 </Link>
@@ -101,16 +114,19 @@ const Header = () => {
             {isDesktop && (
               <li>
                 <FlexBox $gap={8}>
-                  <p>Categories</p> <FaAngleDown />
+                  <p>Categories</p>
+                  <FaAngleDown />
                 </FlexBox>
               </li>
             )}
           </ul>
         </nav>
+
         <StyledSearchBar>
           <input
             type="text"
             placeholder="Search for products..."
+            aria-label="Search products"
             ref={inputRef}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -120,13 +136,16 @@ const Header = () => {
         <FlexBox $gap={32} className="menu">
           {isTablet && (
             <FlexBox $gap={24}>
-              <FaUserCircle size={24} color="var(--col-000" />
-              <IoMdCart size={24} color="var(--col-000" />
+              <FaUserCircle size={24} color="var(--col-000)" />
+              <IoMdCart size={24} color="var(--col-000)" />
             </FlexBox>
           )}
 
           {!isDesktop && (
-            <button onClick={toggleNav} aria-label="Toggle navigation menu">
+            <button
+              onClick={() => setNavOpen((p) => !p)}
+              aria-label="Toggle navigation menu"
+            >
               <div></div>
               <div></div>
               <div></div>
@@ -134,18 +153,19 @@ const Header = () => {
           )}
         </FlexBox>
       </div>
+
       {searchProcess.isTyping && (
         <SearchResultsBox>
-          {searchProcess.result?.length !== 0 ? (
-            searchProcess.result?.map((result, i) => (
-              <li key={i}>
-                <p>
+          {searchProcess.result && searchProcess.result.length > 0 ? (
+            searchProcess.result.map((result, i) => (
+              <Link href={`/products/products-list/${result.id}`} key={i}>
+                <p onClick={filterCtx?.resetFilters}>
                   {result.title} in <span>{result.category}</span>
                 </p>
-              </li>
+              </Link>
             ))
           ) : (
-            <p>no result found</p>
+            <p>No results found</p>
           )}
         </SearchResultsBox>
       )}

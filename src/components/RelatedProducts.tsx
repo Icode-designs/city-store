@@ -6,12 +6,13 @@ import Card from "./Card";
 import Link from "next/link";
 import { numberToStars } from "@/utils/ratings";
 import formatNairaToUSD from "@/utils/formatPrice";
+import PRODUCT from "@/types/productsType";
 
 interface PROPS {
-  id: string;
+  product: PRODUCT;
 }
 
-const RelatedProducts = ({ id }: PROPS) => {
+const RelatedProducts = ({ product }: PROPS) => {
   const productsCtx = useContext(PRODUCTS_CONTEXT);
 
   if (!productsCtx) {
@@ -19,7 +20,9 @@ const RelatedProducts = ({ id }: PROPS) => {
   }
 
   const { loading, products, error } = productsCtx;
-  const relatedProducts = products?.filter((item) => item.id === id);
+  const relatedProducts = products?.filter(
+    (item) => item.category === product.category && item.id !== product.id
+  );
   return (
     <ProductSection>
       <div>Related products</div>
