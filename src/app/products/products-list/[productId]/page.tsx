@@ -2,6 +2,8 @@
 import Card from "@/components/Card";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
+import { addToCart, CartItem } from "@/store/slices/cartSlice";
+import { AppDispatch } from "@/store/store";
 import { StyledProductsList } from "@/styles/components/productsList";
 import {
   CustomButton,
@@ -13,8 +15,10 @@ import formatNairaToUSD from "@/utils/formatPrice";
 import { numberToStars } from "@/utils/ratings";
 import Link from "next/link";
 import React, { use, useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const resolvedParams = use(params);
   const id = resolvedParams.productId;
   const productsCtx = useContext(PRODUCTS_CONTEXT);
@@ -99,6 +103,15 @@ const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
 
   const sortedResult = sortProductsByIdAndCategory();
 
+  const handleAddToCart = ({
+    title,
+    id,
+    price,
+    url,
+  }: Omit<CartItem, "quantity">) => {
+    dispatch(addToCart({ title, id, url, price, quantity: 1 }));
+  };
+
   return (
     <MainContainer>
       <StyledProductsList>
@@ -120,7 +133,19 @@ const Page = ({ params }: { params: Promise<{ productId: string }> }) => {
                     <h3>{formatNairaToUSD(item.price)}</h3>
                   </article>
                 </Link>
-                <CustomButton $variant="extended">Add to cart</CustomButton>
+                <CustomButton
+                  onClick={() =>
+                    handleAddToCart({
+                      title: item.title,
+                      id: item.id,
+                      price: item.price,
+                      url: item.image[0],
+                    })
+                  }
+                  $variant="extended"
+                >
+                  Add to cart
+                </CustomButton>
               </Card>
             ))
           )}

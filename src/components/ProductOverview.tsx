@@ -1,3 +1,6 @@
+"use client";
+import { addToCart, CartItem } from "@/store/slices/cartSlice";
+import { AppDispatch } from "@/store/store";
 import {
   ProductImgBox,
   ProductInfoBox,
@@ -7,6 +10,7 @@ import { CustomButton, FlexBox } from "@/styles/components/ui.Styles";
 import { PRODUCTS } from "@/utils/data";
 import { numberToStars, sumRatings } from "@/utils/ratings";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 interface Props {
   product: (typeof PRODUCTS)[0];
@@ -15,6 +19,16 @@ interface Props {
 }
 
 const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleAddToCart = ({
+    title,
+    id,
+    price,
+    url,
+  }: Omit<CartItem, "quantity">) => {
+    dispatch(addToCart({ title, url, id, price, quantity: 1 }));
+  };
   return (
     <ProductOverviewBox>
       <FlexBox $gap={50} $variant="secondary">
@@ -45,7 +59,19 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
           </FlexBox>
           <p>{product.description}</p>
           <FlexBox $gap={16}>
-            <CustomButton $variant="extended">Add to cart</CustomButton>
+            <CustomButton
+              $variant="extended"
+              onClick={() =>
+                handleAddToCart({
+                  title: product.title,
+                  id: product.id,
+                  price: product.price,
+                  url: product.image[0],
+                })
+              }
+            >
+              Add to cart
+            </CustomButton>
             <CustomButton $variant="extended">Buy now</CustomButton>
           </FlexBox>
         </ProductInfoBox>

@@ -10,8 +10,12 @@ import Link from "next/link";
 import Card from "./Card";
 import { useContext } from "react";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
+import { addToCart, CartItem } from "@/store/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
 
 const FlashSale = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const productsCtx = useContext(PRODUCTS_CONTEXT);
 
   if (!productsCtx) {
@@ -22,7 +26,14 @@ const FlashSale = () => {
   const saleProducts =
     !loading && !error ? products?.filter((product, i) => i <= 7) : [];
 
-  console.log(saleProducts);
+  const handleAddToCart = ({
+    title,
+    id,
+    price,
+    url,
+  }: Omit<CartItem, "quantity">) => {
+    dispatch(addToCart({ title, id, url, price, quantity: 1 }));
+  };
 
   return (
     <ProductSection $variant="flash-sale">
@@ -47,7 +58,19 @@ const FlashSale = () => {
                 <h3>{formatNairaToUSD(item.price)}</h3>
               </article>
             </Link>
-            <CustomButton $variant="extended">Add to cart</CustomButton>
+            <CustomButton
+              onClick={() =>
+                handleAddToCart({
+                  title: item.title,
+                  id: item.id,
+                  price: item.price,
+                  url: item.image[0],
+                })
+              }
+              $variant="extended"
+            >
+              Add to cart
+            </CustomButton>
           </Card>
         ))}
       </ProductsGrid>

@@ -1,17 +1,24 @@
 "use client";
 
-import { HeaderContainer, SearchResultsBox } from "@/styles/components/header";
+import {
+  CartContainer,
+  HeaderContainer,
+  SearchResultsBox,
+} from "@/styles/components/header";
 import { FlexBox, StyledSearchBar } from "@/styles/components/ui.Styles";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
-import { IoMdCart } from "react-icons/io";
+import { FaOpencart } from "react-icons/fa";
 import { useCallback, useContext, useRef, useState } from "react";
 import Logo from "./Logo";
 import useMediaQuery from "@/hooks/useMedia";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 import PRODUCT from "@/types/productsType";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import Cart from "./Cart";
 
 interface SearchProcess {
   isTyping: boolean;
@@ -19,6 +26,8 @@ interface SearchProcess {
 }
 
 const Header = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const totalQty = cartItems.reduce((total, item) => total + item.quantity, 0);
   const [navOpen, setNavOpen] = useState(false);
   const [searchProcess, setSearchProcess] = useState<SearchProcess>({
     isTyping: false,
@@ -32,7 +41,6 @@ const Header = () => {
 
   const handleChange = useCallback(() => {
     if (!productsCtx?.products) return;
-
     const { products } = productsCtx;
     const searchKeyword = inputRef.current?.value.trim().toLowerCase() || "";
 
@@ -78,7 +86,7 @@ const Header = () => {
     <HeaderContainer $navOpen={navOpen}>
       <div>
         {isTablet && <Logo />}
-        {!isTablet && <IoMdCart size={32} color="var(--col-000)" />}
+        {!isTablet && <Cart totalQty={totalQty} />}
 
         <nav>
           <ul>
@@ -137,7 +145,7 @@ const Header = () => {
           {isTablet && (
             <FlexBox $gap={24}>
               <FaUserCircle size={24} color="var(--col-000)" />
-              <IoMdCart size={24} color="var(--col-000)" />
+              <Cart totalQty={totalQty} />
             </FlexBox>
           )}
 

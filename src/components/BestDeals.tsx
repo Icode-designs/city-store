@@ -10,8 +10,12 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import Card from "./Card";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
+import { addToCart, CartItem } from "@/store/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
 
 const BestDeal = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const productsCtx = useContext(PRODUCTS_CONTEXT);
 
   if (!productsCtx) {
@@ -19,6 +23,15 @@ const BestDeal = () => {
   }
 
   const { loading, products, error } = productsCtx;
+
+  const handleAddToCart = ({
+    title,
+    id,
+    price,
+    url,
+  }: Omit<CartItem, "quantity">) => {
+    dispatch(addToCart({ title, id, url, price, quantity: 1 }));
+  };
 
   return (
     <ProductSection $variant={undefined}>
@@ -45,7 +58,19 @@ const BestDeal = () => {
                   <h3>{formatNairaToUSD(item.price)}</h3>
                 </article>
               </Link>
-              <CustomButton $variant="extended">Add to cart</CustomButton>
+              <CustomButton
+                onClick={() =>
+                  handleAddToCart({
+                    title: item.title,
+                    id: item.id,
+                    price: item.price,
+                    url: item.image[0],
+                  })
+                }
+                $variant="extended"
+              >
+                Add to cart
+              </CustomButton>
             </Card>
           ))}
       </ProductsGrid>

@@ -3,6 +3,8 @@ function formatNairaToUSD(nairaAmount: number, rate: number = 1600): string {
   return usdAmount.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   });
 }
 
