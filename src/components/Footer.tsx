@@ -18,7 +18,7 @@ const Footer = () => {
     <FooterContainer>
       <div>
         <article>
-          <Logo />
+          <Logo variant="white" />
           <p>
             We are your one stop store for all things electronics, gadgets and
             more. Have fun shopping with us!

@@ -85,7 +85,7 @@ const Header = () => {
   return (
     <HeaderContainer $navOpen={navOpen}>
       <div>
-        {isTablet && <Logo />}
+        {isTablet && <Logo variant="black" />}
         {!isTablet && <Cart totalQty={totalQty} />}
 
         <nav>

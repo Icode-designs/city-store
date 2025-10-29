@@ -1,14 +1,20 @@
 import { LogoBox } from "@/styles/components/ui.Styles";
 import Link from "next/link";
 import React from "react";
+import black from "@/assets/logoBleck.png";
+import white from "@/assets/logoWhite.png";
 
-const Logo = () => {
+interface Props {
+  variant: "black" | "white";
+}
+
+const Logo = ({ variant }: Props) => {
   return (
-    <LogoBox>
-      <Link href="/">
-        <p>Chago</p>
-      </Link>
-    </LogoBox>
+    <Link href="/">
+      <LogoBox $variant={variant}>
+        <img src={variant === "white" ? white.src : black.src} alt="logo" />
+      </LogoBox>
+    </Link>
   );
 };
 

@@ -24,6 +24,10 @@ export const FooterContainer = styled.footer`
       grid-template-columns: 1fr;
       grid-gap: ${pxTorem(16)};
       max-width: ${pxTorem(350)};
+      justify-items: center;
+    }
+
+    div {
     }
     ul {
       &:nth-of-type(1) {
@@ -42,8 +46,11 @@ export const FooterContainer = styled.footer`
       justify-items: stretch;
       max-width: var(--max-width);
       margin: var(--centered);
+      article {
+        justify-items: unset;
+      }
 
-      * {
+      > * {
         width: fit-content;
       }
       align-items: center;
@@ -69,6 +76,10 @@ export const Socials = styled.div`
   svg {
     color: var(--col-100);
     font-size: ${pxTorem(24)};
+  }
+
+  @media ${QUERY.TABLET} {
+    justify-content: flex-start;
   }
 `;
 

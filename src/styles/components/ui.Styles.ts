@@ -31,13 +31,27 @@ export const MainContainer = styled.main<{ $variant?: "secondary" }>`
     `}
 `;
 
-export const LogoBox = styled.div`
-  min-width: fit-content;
-  p {
-    font-family: var(--font-italianno);
-    font-size: ${pxTorem(32)};
-    font-weight: var(--regular);
-    line-height: 0.8;
+export const LogoBox = styled.div<{ $variant: "black" | "white" }>`
+  max-width: ${pxTorem(200)};
+  display: flex;
+  align-self: center;
+  align-items: center;
+  ${({ $variant }) =>
+    $variant === "white" &&
+    css`
+      width: ${pxTorem(150)};
+      height: ${pxTorem(70)};
+    `}
+  ${({ $variant }) =>
+    $variant === "black" &&
+    css`
+      width: ${pxTorem(200)};
+      height: ${pxTorem(70)};
+    `}
+  img {
+    width: 100%;
+    height: fit-content;
+    object-fit: cover;
   }
 `;
 
