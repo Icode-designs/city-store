@@ -36,22 +36,31 @@ export const LogoBox = styled.div<{ $variant: "black" | "white" }>`
   display: flex;
   align-self: center;
   align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: ${pxTorem(80)};
+
   ${({ $variant }) =>
     $variant === "white" &&
     css`
       width: ${pxTorem(150)};
-      height: ${pxTorem(70)};
     `}
+
   ${({ $variant }) =>
     $variant === "black" &&
     css`
       width: ${pxTorem(200)};
-      height: ${pxTorem(70)};
     `}
+
   img {
     width: 100%;
-    height: fit-content;
+    height: auto;
+    max-height: 100%;
     object-fit: cover;
+    display: block;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 `;
 
