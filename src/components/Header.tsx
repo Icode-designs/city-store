@@ -135,7 +135,7 @@ const Header = () => {
         </StyledSearchBar>
 
         <FlexBox $gap={32} className="menu">
-          {isDesktop && (
+          {isTablet && (
             <FlexBox $gap={24}>
               <FaUserCircle size={24} color="var(--col-000)" />
               <Cart />

@@ -28,7 +28,7 @@ export const StyledMobileNav = styled.nav`
     }
   }
 
-  @media ${QUERY.DESKTOP} {
+  @media ${QUERY.TABLET} {
     display: none;
   }
 `;
