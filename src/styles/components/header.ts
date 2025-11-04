@@ -54,28 +54,7 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
     }
 
     nav {
-      position: absolute;
-      top: ${pxTorem(81.19)};
-      right: ${({ $navOpen }) => ($navOpen ? "0" : "-100%")};
-      padding: ${pxTorem(40)};
-      background-color: var(--col-100);
-      min-width: fit-content;
-      height: fit-content;
-      transition: right 0.5s ease-in-out;
-      z-index: 10;
-      border-bottom-left-radius: ${pxTorem(16)};
-
-      ul {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: ${pxTorem(16)};
-        li {
-          p {
-            font-weight: var(--bold);
-            font-size: ${pxTorem(20)};
-          }
-        }
-      }
+      display: none;
     }
   }
 
