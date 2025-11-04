@@ -32,25 +32,20 @@ export const MainContainer = styled.main<{ $variant?: "secondary" }>`
 `;
 
 export const LogoBox = styled.div<{ $variant: "black" | "white" }>`
-  max-width: ${pxTorem(200)};
+  width: ${pxTorem(100)};
   display: flex;
   align-self: center;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   height: ${pxTorem(80)};
+  a {
+    width: 100%;
+  }
 
-  ${({ $variant }) =>
-    $variant === "white" &&
-    css`
-      width: ${pxTorem(150)};
-    `}
-
-  ${({ $variant }) =>
-    $variant === "black" &&
-    css`
-      width: ${pxTorem(200)};
-    `}
+  @media ${QUERY.TABLET} {
+    width: ${pxTorem(200)};
+  }
 
   img {
     width: 100%;

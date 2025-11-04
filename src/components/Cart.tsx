@@ -1,13 +1,14 @@
+"use client";
+import { RootState } from "@/store/store";
 import { CartContainer } from "@/styles/components/header";
 import Link from "next/link";
 import React from "react";
 import { FaOpencart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
-interface Props {
-  totalQty: number;
-}
-
-const Cart = ({ totalQty }: Props) => {
+const Cart = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const totalQty = cartItems.reduce((total, item) => total + item.quantity, 0);
   return (
     <Link href="/cart">
       <CartContainer>

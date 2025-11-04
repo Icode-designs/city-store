@@ -9,15 +9,12 @@ import { FlexBox, StyledSearchBar } from "@/styles/components/ui.Styles";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
-import { FaOpencart } from "react-icons/fa";
 import { useCallback, useContext, useRef, useState } from "react";
 import Logo from "./Logo";
 import useMediaQuery from "@/hooks/useMedia";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 import PRODUCT from "@/types/productsType";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import Cart from "./Cart";
 
 interface SearchProcess {
@@ -26,8 +23,6 @@ interface SearchProcess {
 }
 
 const Header = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const totalQty = cartItems.reduce((total, item) => total + item.quantity, 0);
   const [navOpen, setNavOpen] = useState(false);
   const [searchProcess, setSearchProcess] = useState<SearchProcess>({
     isTyping: false,
@@ -85,9 +80,7 @@ const Header = () => {
   return (
     <HeaderContainer $navOpen={navOpen}>
       <div>
-        {isTablet && <Logo variant="black" />}
-        {!isTablet && <Cart totalQty={totalQty} />}
-
+        <Logo variant="black" />
         <nav>
           <ul>
             {!isTablet && (
@@ -142,22 +135,11 @@ const Header = () => {
         </StyledSearchBar>
 
         <FlexBox $gap={32} className="menu">
-          {isTablet && (
+          {isDesktop && (
             <FlexBox $gap={24}>
               <FaUserCircle size={24} color="var(--col-000)" />
-              <Cart totalQty={totalQty} />
+              <Cart />
             </FlexBox>
-          )}
-
-          {!isDesktop && (
-            <button
-              onClick={() => setNavOpen((p) => !p)}
-              aria-label="Toggle navigation menu"
-            >
-              <div></div>
-              <div></div>
-              <div></div>
-            </button>
           )}
         </FlexBox>
       </div>

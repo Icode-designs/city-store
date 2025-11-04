@@ -8,6 +8,8 @@ import ProductsContextProvider from "@/providers/productsProvider";
 import NewsLetter from "@/components/NewsLetter";
 import FilterContextProvider from "@/providers/filterProvider";
 import Providers from "@/providers/ReduxProvider";
+import useMediaQuery from "@/hooks/useMedia";
+import MobileNav from "@/components/MobileNav";
 
 const italianno = Italianno({
   variable: "--font-italiano",
@@ -37,18 +39,19 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StyledComponentsRegistry>
-          <GlobalStyle />
+          <Providers>
+            <GlobalStyle />
 
-          <ProductsContextProvider>
-            <FilterContextProvider>
-              <Providers>
+            <ProductsContextProvider>
+              <FilterContextProvider>
                 <Header />
                 {children}
-              </Providers>
-            </FilterContextProvider>
-          </ProductsContextProvider>
-          <NewsLetter />
-          <Footer />
+              </FilterContextProvider>
+            </ProductsContextProvider>
+            <NewsLetter />
+            <MobileNav />
+            <Footer />
+          </Providers>
         </StyledComponentsRegistry>
       </body>
     </html>

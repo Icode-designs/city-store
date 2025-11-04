@@ -21,7 +21,7 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
     margin: var(--centered);
     height: fit-content;
     padding: 0 ${pxTorem(16)};
-    gap: ${pxTorem(24)};
+    gap: ${pxTorem(16)};
 
     .menu {
       > button {
