@@ -38,13 +38,14 @@ export const LogoBox = styled.div<{ $variant: "black" | "white" }>`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: ${pxTorem(80)};
+  height: ${pxTorem(50)};
   a {
     width: 100%;
   }
 
   @media ${QUERY.TABLET} {
     width: ${pxTorem(200)};
+    height: ${pxTorem(80)};
   }
 
   img {
@@ -70,7 +71,7 @@ export const StyledSearchBar = styled.div`
     border: ${pxTorem(1)} solid var(--col-400);
     border-radius: var(--border-radius);
     width: 100%;
-    height: ${pxTorem(50)};
+    height: fit-content;
     padding: ${pxTorem(16)} ${pxTorem(16)};
     padding-right: ${pxTorem(65)};
 

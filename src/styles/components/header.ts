@@ -62,23 +62,28 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
     > div {
       padding: 0;
       nav {
+        display: flex;
         position: static;
         background: none;
         font-weight: var(--bold);
         padding: 0;
-
         gap: ${pxTorem(16)};
         align-items: center;
         width: fit-content;
         top: unset;
         left: unset;
         height: fit-content;
-        width: fit-content;
+
         ul {
           display: flex;
           gap: ${pxTorem(16)};
+          width: 100%;
           li {
-            p {
+            width: fit-content;
+            width: 100%;
+            a {
+              width: fit-content;
+              display: flex;
               font-size: ${pxTorem(16)};
               font-weight: var(--semibold);
             }

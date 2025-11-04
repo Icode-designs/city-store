@@ -83,43 +83,16 @@ const Header = () => {
         <Logo variant="black" />
         <nav>
           <ul>
-            {!isTablet && (
-              <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-                <Link href="/">
-                  <p>Home</p>
-                </Link>
-              </li>
-            )}
             <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-              <Link href="">
-                <p>New arrivals</p>
-              </Link>
+              <Link href="">Products</Link>
             </li>
-            <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-              <Link href="">
-                <p>5 stars</p>
-              </Link>
+
+            <li>
+              <FlexBox $gap={8}>
+                <p>Categories</p>
+                <FaAngleDown />
+              </FlexBox>
             </li>
-            <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-              <Link href="">
-                <p>Best Deals</p>
-              </Link>
-            </li>
-            {!isTablet && (
-              <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-                <Link href="">
-                  <p>Profile</p>
-                </Link>
-              </li>
-            )}
-            {isDesktop && (
-              <li>
-                <FlexBox $gap={8}>
-                  <p>Categories</p>
-                  <FaAngleDown />
-                </FlexBox>
-              </li>
-            )}
           </ul>
         </nav>
 
