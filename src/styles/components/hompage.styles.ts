@@ -38,7 +38,7 @@ export const HeroBox = styled.div`
     * {
       color: var(--col-100);
     }
-    button {
+    a {
       justify-self: center;
     }
   }
@@ -66,7 +66,7 @@ export const HeroBox = styled.div`
     }
   }
 
-  @media ${QUERY.TABLET} {
+  @media ${QUERY.DESKTOP} {
     padding-left: ${pxTorem(40)};
     margin: 0 ${pxTorem(16)};
     margin-top: ${pxTorem(24)};
@@ -74,7 +74,7 @@ export const HeroBox = styled.div`
     justify-content: unset;
     article {
       text-align: left;
-      button {
+      a {
         justify-self: unset;
       }
     }

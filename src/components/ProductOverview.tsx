@@ -8,6 +8,7 @@ import {
 } from "@/styles/components/productDetails";
 import { CustomButton, FlexBox } from "@/styles/components/ui.Styles";
 import { PRODUCTS } from "@/utils/data";
+import formatToNaira from "@/utils/formatPrice";
 import { numberToStars, sumRatings } from "@/utils/ratings";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -51,6 +52,7 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
 
         <ProductInfoBox>
           <h1>{product.title}</h1>
+          <p>{formatToNaira(product.price)}</p>
           <FlexBox $gap={10} $justifyContent="center">
             <FlexBox $justifyContent="right">
               {numberToStars(product.rating)}

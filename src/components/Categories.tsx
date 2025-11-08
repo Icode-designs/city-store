@@ -14,9 +14,7 @@ const Categories = () => {
       <ProductsGrid>
         {categories.map(([name, image]) => (
           <Card variant="categories" key={name}>
-            <Link
-              href={`/products/products-list/categories/${name.toLowerCase()}`}
-            >
+            <Link href={`/products/products-list/${name.toLowerCase()}`}>
               <img src={image.src} alt={name} loading="lazy" />
               <article>
                 <p>{name}</p>

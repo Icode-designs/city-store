@@ -1,6 +1,6 @@
 "use client";
 import { HeroBox } from "@/styles/components/hompage.styles";
-import { CustomButton } from "@/styles/components/ui.Styles";
+import { CustomLink } from "@/styles/components/ui.Styles";
 import { HERO_IMAGE_URL } from "@/utils/data";
 import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
@@ -39,7 +39,9 @@ const HomePageHero = () => {
           We are your one stop store for all things electronics, gadgets and
           more. Have fun shopping with us!
         </p>
-        <CustomButton>Shop Now</CustomButton>
+        <CustomLink href={`/products/products-list/${"all-products"}`}>
+          Shop Now
+        </CustomLink>
       </article>
 
       <div>

@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebaseCl";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import type PRODUCT from "@/types/productsType";
 
 export async function getProductById(

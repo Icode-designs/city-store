@@ -16,6 +16,7 @@ import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
 import PRODUCT from "@/types/productsType";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
 import Cart from "./Cart";
+import { CATEGORIES } from "@/utils/imageImport";
 
 interface SearchProcess {
   isTyping: boolean;
@@ -24,6 +25,7 @@ interface SearchProcess {
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
   const [searchProcess, setSearchProcess] = useState<SearchProcess>({
     isTyping: false,
     result: undefined,
@@ -31,8 +33,10 @@ const Header = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const productsCtx = useContext(PRODUCTS_CONTEXT);
   const isTablet = useMediaQuery(768);
-  const isDesktop = useMediaQuery(1200);
+
   const filterCtx = useContext(FILTER_CONTEXT);
+
+  const categories = Object.entries(CATEGORIES);
 
   const handleChange = useCallback(() => {
     if (!productsCtx?.products) return;
@@ -45,10 +49,8 @@ const Header = () => {
     }
 
     const searchResult =
-      products.filter(({ title, category }) =>
-        [title, category].some((field) =>
-          field.toLowerCase().includes(searchKeyword)
-        )
+      products.filter(({ title }) =>
+        [title].some((field) => field.toLowerCase().includes(searchKeyword))
       ) || [];
 
     setSearchProcess({ isTyping: true, result: searchResult });
@@ -64,19 +66,10 @@ const Header = () => {
     return <p>Unable to load products context. Try refreshing the page.</p>;
   }
 
-  const { loading, error } = productsCtx;
-
-  if (error) {
-    return (
-      <p>An error occurred. Check your internet connection and try again.</p>
-    );
+  function handleShowCategories() {
+    setShowCategories((prev) => !prev);
   }
 
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  // normal render
   return (
     <HeaderContainer $navOpen={navOpen}>
       <div>
@@ -84,14 +77,27 @@ const Header = () => {
         <nav>
           <ul>
             <li onClick={navOpen ? () => setNavOpen(false) : undefined}>
-              <Link href="">Products</Link>
+              <Link href={`/products/products-list/${"all-products"}`}>
+                Products
+              </Link>
             </li>
 
-            <li>
+            <li className="categories" onClick={handleShowCategories}>
               <FlexBox $gap={8}>
                 <p>Categories</p>
                 <FaAngleDown />
               </FlexBox>
+              {showCategories && (
+                <ul>
+                  {categories.map(([name], i) => (
+                    <li key={i}>
+                      <Link href={`/products/products-list/${name}`}>
+                        {name.replace(/-/g, " ")}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           </ul>
         </nav>
@@ -119,17 +125,19 @@ const Header = () => {
 
       {searchProcess.isTyping && (
         <SearchResultsBox>
-          {searchProcess.result && searchProcess.result.length > 0 ? (
-            searchProcess.result.map((result, i) => (
-              <Link href={`/products/products-list/${result.id}`} key={i}>
-                <p onClick={filterCtx?.resetFilters}>
-                  {result.title} in <span>{result.category}</span>
-                </p>
-              </Link>
-            ))
-          ) : (
-            <p>No results found</p>
-          )}
+          <div>
+            {searchProcess.result && searchProcess.result.length > 0 ? (
+              searchProcess.result.map((result, i) => (
+                <Link href={`/products/products-list/${result.id}`} key={i}>
+                  <p onClick={filterCtx?.resetFilters}>
+                    {result.title} in <span>{result.category}</span>
+                  </p>
+                </Link>
+              ))
+            ) : (
+              <p>No results found</p>
+            )}
+          </div>
         </SearchResultsBox>
       )}
     </HeaderContainer>

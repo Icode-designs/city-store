@@ -20,7 +20,7 @@ const MobileNav = () => {
           <Cart />
         </li>
         <li>
-          <Link href="/products/products-list/phone1">
+          <Link href={`/products/products-list/${"all-products"}`}>
             <FaStore />
           </Link>
         </li>

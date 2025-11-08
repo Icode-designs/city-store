@@ -1,12 +1,12 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback, useMemo } from "react";
 
 interface FilterValues {
   categories: string[];
   minPrice: string;
   maxPrice: string;
   rating: number[];
-  searchTerm?: string; // 🔹 new
+  searchTerm?: string;
 }
 
 interface FilterContextType {
@@ -29,7 +29,7 @@ const FilterContextProvider: React.FC<{ children: React.ReactNode }> = ({
     searchTerm: "",
   });
 
-  async function handleSubmit(formData: FormData) {
+  const handleSubmit = useCallback(async (formData: FormData) => {
     const categories = formData.getAll("categories").map((v) => v.toString());
 
     const minPrice = formData.get("min")?.toString() ?? "";
@@ -46,16 +46,17 @@ const FilterContextProvider: React.FC<{ children: React.ReactNode }> = ({
       minPrice,
       maxPrice,
       rating: numberRating,
+      searchTerm: "", // Reset search term on form submit
     };
 
     setFilters(result);
-  }
+  }, []);
 
-  const updateSearchTerm = (term: string) => {
+  const updateSearchTerm = useCallback((term: string) => {
     setFilters((prev) => ({ ...prev, searchTerm: term }));
-  };
+  }, []);
 
-  const resetFilters = () => {
+  const resetFilters = useCallback(() => {
     setFilters({
       categories: [],
       minPrice: "",
@@ -63,14 +64,17 @@ const FilterContextProvider: React.FC<{ children: React.ReactNode }> = ({
       rating: [],
       searchTerm: "",
     });
-  };
+  }, []);
 
-  const provision = {
-    handleSubmit,
-    filters,
-    updateSearchTerm,
-    resetFilters,
-  };
+  const provision = useMemo(
+    () => ({
+      handleSubmit,
+      filters,
+      updateSearchTerm,
+      resetFilters,
+    }),
+    [handleSubmit, filters, updateSearchTerm, resetFilters]
+  );
 
   return (
     <FILTER_CONTEXT.Provider value={provision}>

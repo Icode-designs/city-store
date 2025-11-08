@@ -83,7 +83,6 @@ p, li{
     font-size: ${pxTorem(16)};
     font-weight: var(--regular);
     line-height: 1.4;
-    opacity: 0.8;
 }
 `;
 

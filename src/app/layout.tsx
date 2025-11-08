@@ -10,6 +10,7 @@ import FilterContextProvider from "@/providers/filterProvider";
 import Providers from "@/providers/ReduxProvider";
 import useMediaQuery from "@/hooks/useMedia";
 import MobileNav from "@/components/MobileNav";
+import { fetchProducts } from "@/utils/fetchAllProducts";
 
 const italianno = Italianno({
   variable: "--font-italiano",
@@ -30,11 +31,12 @@ export const metadata: Metadata = {
   creator: "Osakwe Bonaventure Ifechukwu",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const products = await fetchProducts();
   return (
     <html lang="en">
       <body>
@@ -42,7 +44,7 @@ export default function RootLayout({
           <Providers>
             <GlobalStyle />
 
-            <ProductsContextProvider>
+            <ProductsContextProvider initialProducts={products}>
               <FilterContextProvider>
                 <Header />
                 {children}

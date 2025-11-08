@@ -13,7 +13,7 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
   padding: ${pxTorem(16)} 0;
   z-index: 100;
 
-  > div {
+  > div:nth-of-type(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,7 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
   }
 
   @media ${QUERY.DESKTOP} {
-    > div {
+    > div:nth-of-type(1) {
       padding: 0;
       nav {
         display: flex;
@@ -74,13 +74,29 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
         left: unset;
         height: fit-content;
 
-        ul {
+        ul:nth-of-type(1) {
           display: flex;
           gap: ${pxTorem(16)};
           width: 100%;
           li {
             width: fit-content;
             width: 100%;
+
+            &.categories {
+              position: relative;
+
+              ul {
+                display: grid;
+                gap: ${pxTorem(8)};
+                position: absolute;
+                padding: ${pxTorem(16)};
+                width: fit-content;
+                top: ${pxTorem(70)};
+                background-color: var(--col-100);
+                left: 0;
+                border-radius: 0 0 ${pxTorem(12)} ${pxTorem(12)};
+              }
+            }
             a {
               width: fit-content;
               display: flex;
@@ -100,25 +116,31 @@ export const HeaderContainer = styled.header<{ $navOpen?: boolean }>`
 
 export const SearchResultsBox = styled.div`
   position: absolute;
-  display: grid !important;
-  grid-gap: ${pxTorem(4)};
-  width: 100%;
-  height: fit-content;
-  top: ${pxTorem(82)};
-  left: 0;
-  right: 0;
-  padding: ${pxTorem(16)};
-  padding-top: ${pxTorem(24)};
-  border-bottom-left-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  background-color: var(--col-100);
-  max-width: var(--max-width);
-  margin: var(--centered);
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(1.5rem);
+  background-color: rgba(0, 0, 0, 0.5);
 
-  a {
-    width: 100%;
-    span {
-      font-weight: var(--bold);
+  > div {
+    display: grid !important;
+    grid-gap: ${pxTorem(4)};
+    width: 80%;
+    height: fit-content;
+    top: ${pxTorem(120)};
+    left: 0;
+    right: 0;
+    padding: ${pxTorem(16)};
+    padding-top: ${pxTorem(24)};
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    background-color: var(--col-100);
+    max-width: var(--max-width);
+    margin: var(--centered);
+
+    a {
+      span {
+        font-weight: var(--bold);
+      }
     }
   }
 `;

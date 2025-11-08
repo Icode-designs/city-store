@@ -10,7 +10,7 @@ export const StyledProductsList = styled.section`
 
 export const StyledFilter = styled.div<{ $isOpen: boolean }>`
   position: fixed;
-  top: ${pxTorem(82)};
+  top: ${pxTorem(115)};
   left: 0;
   background-color: var(--col-100);
   width: ${({ $isOpen }) => ($isOpen ? "100%" : pxTorem(40))};

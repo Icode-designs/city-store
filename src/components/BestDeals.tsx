@@ -4,7 +4,7 @@ import {
   ProductSection,
   ProductsGrid,
 } from "@/styles/components/ui.Styles";
-import formatNairaToUSD from "@/utils/formatPrice";
+import formatToNaira from "@/utils/formatPrice";
 import { numberToStars } from "@/utils/ratings";
 import Link from "next/link";
 import React, { useContext } from "react";
@@ -22,7 +22,7 @@ const BestDeal = () => {
     return;
   }
 
-  const { loading, products, error } = productsCtx;
+  const { products } = productsCtx;
 
   const handleAddToCart = ({
     title,
@@ -42,37 +42,31 @@ const BestDeal = () => {
         </span>
       </div>
       <ProductsGrid>
-        {loading && <p>Loading products...</p>}
-
-        {/* Error state */}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
-        {!error &&
-          !loading &&
-          products?.map((item, i) => (
-            <Card key={i}>
-              <Link href={`/products/products-details/${item.id}`}>
-                <img src={item.image[0]} alt={item.title} />
-                <article>
-                  <p>{item.title}</p>
-                  <p>{numberToStars(item.rating)}</p>
-                  <h3>{formatNairaToUSD(item.price)}</h3>
-                </article>
-              </Link>
-              <CustomButton
-                onClick={() =>
-                  handleAddToCart({
-                    title: item.title,
-                    id: item.id,
-                    price: item.price,
-                    url: item.image[0],
-                  })
-                }
-                $variant="extended"
-              >
-                Add to cart
-              </CustomButton>
-            </Card>
-          ))}
+        {products?.map((item, i) => (
+          <Card key={i}>
+            <Link href={`/products/product-details/${item.id}`}>
+              <img src={item.image[0]} alt={item.title} />
+              <article>
+                <p>{item.title}</p>
+                <p>{numberToStars(item.rating)}</p>
+                <h3>{formatToNaira(item.price)}</h3>
+              </article>
+            </Link>
+            <CustomButton
+              onClick={() =>
+                handleAddToCart({
+                  title: item.title,
+                  id: item.id,
+                  price: item.price,
+                  url: item.image[0],
+                })
+              }
+              $variant="extended"
+            >
+              Add to cart
+            </CustomButton>
+          </Card>
+        ))}
       </ProductsGrid>
     </ProductSection>
   );

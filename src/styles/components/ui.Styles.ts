@@ -2,6 +2,7 @@
 import pxTorem from "@/utils/pxToRem";
 import styled, { css } from "styled-components";
 import QUERY from "../mediaBreakpoints";
+import Link from "next/link";
 
 export const MainContainer = styled.main<{ $variant?: "secondary" }>`
   max-width: var(--max-width);
@@ -134,6 +135,45 @@ export const CustomButton = styled.button<{
   }
 `;
 
+export const CustomLink = styled(Link)<{
+  $variant?: "extended" | "outlined";
+}>`
+  background-color: var(--col-400);
+  color: var(--col-100);
+  border: none;
+  padding: ${pxTorem(16)};
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all ease 0.5s;
+  border-radius: var(--border-radius);
+  font-weight: var(--bold);
+  text-transform: capitalize;
+
+  ${({ $variant }) =>
+    $variant === "extended" &&
+    css`
+      width: 100%;
+    `}
+
+  ${({ $variant }) =>
+    $variant === "outlined" &&
+    css`
+      background-color: none;
+      border: ${pxTorem(1)} solid var(--col-400);
+
+      &:hover {
+        background-color: var(--col-400);
+      }
+    `}
+
+    &:hover {
+    opacity: 0.6;
+  }
+`;
+
 export const FlexBox = styled.div<{
   $justifyContent?: string;
   $alignItems?: string;
@@ -194,15 +234,13 @@ export const ProductCard = styled.div<{ $variant?: string }>`
   transition: all ease 0.5s;
   cursor: pointer;
   padding: ${pxTorem(16)} 0;
-  grid-gap: ${pxTorem(16)};
+  grid-gap: ${pxTorem(8)};
   height: 100%;
   position: relative;
-  justify-items: center;
   padding: ${pxTorem(8)};
 
   button {
     align-self: end;
-    margin: 0 ${pxTorem(8)};
   }
 
   a {

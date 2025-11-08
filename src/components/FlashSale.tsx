@@ -4,7 +4,7 @@ import {
   ProductSection,
   ProductsGrid,
 } from "@/styles/components/ui.Styles";
-import formatNairaToUSD from "@/utils/formatPrice";
+import formatToNaira from "@/utils/formatPrice";
 import { numberToStars } from "@/utils/ratings";
 import Link from "next/link";
 import Card from "./Card";
@@ -22,9 +22,8 @@ const FlashSale = () => {
     return;
   }
 
-  const { loading, products, error } = productsCtx;
-  const saleProducts =
-    !loading && !error ? products?.filter((product, i) => i <= 7) : [];
+  const { products } = productsCtx;
+  const saleProducts = products?.filter((product, i) => i <= 7);
 
   const handleAddToCart = ({
     title,
@@ -44,18 +43,14 @@ const FlashSale = () => {
         </span>
       </div>
       <ProductsGrid>
-        {loading && <p>Loading products...</p>}
-
-        {/* Error state */}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
         {saleProducts?.map((item, i) => (
           <Card key={i}>
-            <Link href={`/products/products-details/${item.id}`}>
+            <Link href={`/products/product-details/${item.id}`}>
               <img src={item.image[0]} alt={item.title} />
               <article>
                 <p>{item.title}</p>
                 <p>{numberToStars(item.rating)}</p>
-                <h3>{formatNairaToUSD(item.price)}</h3>
+                <h3>{formatToNaira(item.price)}</h3>
               </article>
             </Link>
             <CustomButton
