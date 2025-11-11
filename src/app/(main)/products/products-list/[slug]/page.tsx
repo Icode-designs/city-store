@@ -169,7 +169,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   }
 
   return (
-    <MainContainer>
+    <MainContainer $variant="secondary">
       <StyledProductsList>
         <FlexBox>
           <h1>{pageTitle}</h1>

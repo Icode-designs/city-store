@@ -9,21 +9,24 @@ export const MainContainer = styled.main<{ $variant?: "secondary" }>`
   width: 100%;
   margin: var(--centered);
   margin-bottom: ${pxTorem(90)};
-  margin-top: ${pxTorem(100)};
+  margin-top: ${pxTorem(82)};
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: ${pxTorem(90)};
   @media ${QUERY.DESKTOP} {
+    margin-top: ${pxTorem(112)};
     padding: 0;
   }
 
   ${({ $variant }) =>
     $variant === "secondary" &&
     css`
+      margin-top: ${pxTorem(94)};
       background-color: var(--col-100);
       border-radius: var(--border-radius);
       padding: ${pxTorem(16)};
       @media ${QUERY.TABLET} {
+        margin-top: ${pxTorem(140)} !important;
         padding: ${pxTorem(24)};
       }
       @media ${QUERY.DESKTOP} {
@@ -64,36 +67,6 @@ export const LogoBox = styled.div<{ $variant: "black" | "white" }>`
 export const StyledSearchBar = styled.div`
   width: 100%;
   max-width: ${pxTorem(600)};
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: fit-content;
-  input {
-    border: ${pxTorem(1)} solid var(--col-400);
-    border-radius: var(--border-radius);
-    width: 100%;
-    height: fit-content;
-    padding: ${pxTorem(16)} ${pxTorem(16)};
-    padding-right: ${pxTorem(65)};
-
-    @media ${QUERY.TABLET} {
-      padding-right: ${pxTorem(95)};
-    }
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-  button {
-    position: absolute;
-    right: ${pxTorem(5)};
-    top: ${pxTorem(5)};
-    bottom: ${pxTorem(5)};
-    font-size: ${pxTorem(16)};
-    color: var(--col-100);
-    height: 80%;
-  }
 `;
 
 export const CustomButton = styled.button<{
@@ -122,7 +95,7 @@ export const CustomButton = styled.button<{
   ${({ $variant }) =>
     $variant === "outlined" &&
     css`
-      background-color: none;
+      background-color: none !important;
       border: ${pxTorem(1)} solid var(--col-400);
 
       &:hover {
@@ -302,5 +275,132 @@ export const ProductsGrid = styled.div`
   border-bottom-left-radius: var(--border-radius);
   @media ${QUERY.TABLET} {
     grid-template-columns: repeat(auto-fill, minmax(${pxTorem(200)}, 1fr));
+  }
+`;
+
+export const AuthMain = styled.main`
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  padding: ${pxTorem(16)};
+  min-height: 100vh;
+  @keyframes entry {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  animation: entry ease-in-out 0.5s;
+
+  form {
+    display: grid;
+    max-width: ${pxTorem(800)};
+    width: 100%;
+    border-radius: var(--border-radius);
+    gap: ${pxTorem(32)};
+    background-color: var(--col-100);
+    box-lines: ${pxTorem(6)} ${pxTorem(6)} ${pxTorem(10)} rgba(0, 0, 0, 0.1);
+    padding: ${pxTorem(40)} ${pxTorem(16)};
+
+    div {
+      position: relative;
+      width: 100%;
+
+      .password {
+        padding-right: ${pxTorem(50)};
+      }
+      .error {
+        position: absolute;
+        color: var(--col-300);
+        bottom: 0;
+        right: 0;
+        transform: translateY(100%);
+        font-size: ${pxTorem(11)};
+      }
+
+      .eye {
+        color: grey;
+        font-size: ${pxTorem(32)};
+        position: absolute;
+        right: 8px;
+        top: 8px;
+      }
+    }
+
+    fieldset {
+      border: none;
+      display: grid;
+      gap: ${pxTorem(24)};
+    }
+
+    .seperator {
+      p {
+        flex: 2;
+        flex-wrap: nowrap;
+        width: 100%;
+      }
+      div {
+        flex: 1;
+        height: 1px;
+        border-color: grey;
+        border: solid 1px;
+        opacity: 0.6;
+      }
+    }
+
+    .google {
+      padding: ${pxTorem(16)};
+      border-radius: var(--border-radius);
+      border: grey 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: ${pxTorem(10)};
+      font-weight: bold;
+      transition: all ease 0.5s;
+      color: grey;
+
+      svg {
+        font-size: ${pxTorem(24)};
+      }
+
+      &:hover {
+        background-color: grey;
+        color: var(--col-100);
+      }
+    }
+
+    > div {
+      text-align: center;
+      h1 {
+        margin-bottom: ${pxTorem(16)};
+      }
+      p {
+        font-weight: var(--bold);
+        color: grey;
+        a {
+          color: var(--col-400);
+        }
+      }
+    }
+  }
+
+  @media ${QUERY.TABLET} {
+    padding: ${pxTorem(24)};
+
+    form {
+      .seperator {
+        p {
+          flex: 1;
+        }
+        div {
+          flex: 1.5;
+        }
+      }
+    }
   }
 `;

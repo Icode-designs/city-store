@@ -6,7 +6,8 @@ import {
 } from "@/styles/components/productsList";
 import { CustomButton, FlexBox } from "@/styles/components/ui.Styles";
 import React, { useContext, useState } from "react";
-import { FaAngleLeft, FaFilter } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
 
@@ -48,7 +49,7 @@ const Filter = () => {
         </AnimatePresence>
 
         <button onClick={toggleFilter}>
-          {openFilter ? <FaAngleLeft /> : <FaFilter />}
+          {openFilter ? <IoClose /> : <FaFilter />}
         </button>
       </FlexBox>
       {openFilter && (

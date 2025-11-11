@@ -84,6 +84,22 @@ p, li{
     font-weight: var(--regular);
     line-height: 1.4;
 }
+
+input {
+    border-radius: var(--border-radius);
+    padding: ${pxTorem(16)};
+    width: 100%;
+    border: ${pxTorem(1)} solid grey;
+    transition: all ease 0.5s;
+    &[type="checkbox"] {
+      width: fit-content;
+      border-radius: var(--border-radius);
+    }
+  }
+  input:focus {
+    border-color: var(--col-400);
+    outline: none;
+  }
 `;
 
 export default GlobalStyle;

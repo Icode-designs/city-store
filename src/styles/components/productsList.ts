@@ -1,3 +1,4 @@
+"use client";
 import pxTorem from "@/utils/pxToRem";
 import styled from "styled-components";
 import QUERY from "../mediaBreakpoints";
@@ -10,17 +11,17 @@ export const StyledProductsList = styled.section`
 
 export const StyledFilter = styled.div<{ $isOpen: boolean }>`
   position: fixed;
-  top: ${pxTorem(115)};
-  left: 0;
+  top: ${({ $isOpen }) => ($isOpen ? pxTorem(80) : pxTorem(115))};
+  right: 0;
   background-color: var(--col-100);
-  width: ${({ $isOpen }) => ($isOpen ? "100%" : pxTorem(40))};
+  width: ${({ $isOpen }) => ($isOpen ? "100%" : pxTorem(60))};
   height: ${({ $isOpen }) =>
-    $isOpen ? `calc(100vh - ${pxTorem(82)})` : pxTorem(45)};
+    $isOpen ? `calc(100vh - ${pxTorem(82)})` : pxTorem(60)};
   z-index: 20;
-  transition: width 0.4s ease, height 0.4s ease, padding 0.3s ease;
+  transition: all 0.4s ease, height 0.4s ease, padding 0.3s ease;
   padding: ${pxTorem(16)};
   padding-top: 0;
-  border-radius: 0 ${pxTorem(12)} ${pxTorem(12)} 0;
+  border-radius: ${pxTorem(12)} 0 0 ${pxTorem(12)};
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -30,10 +31,6 @@ export const StyledFilter = styled.div<{ $isOpen: boolean }>`
     display: none; /* Chrome, Safari, Opera */
   }
 
-  button {
-    width: fit-content;
-  }
-
   > div:nth-of-type(1) {
     width: 100%;
     position: sticky;
@@ -41,10 +38,16 @@ export const StyledFilter = styled.div<{ $isOpen: boolean }>`
     top: 0;
     left: 0;
     padding-top: ${pxTorem(16)};
+    > button {
+      svg {
+        font-size: 24px;
+      }
+    }
   }
 
   @media ${QUERY.TABLET} {
     width: ${({ $isOpen }) => ($isOpen ? "50%" : pxTorem(60))};
+    top: ${pxTorem(112)};
   }
 `;
 
@@ -69,14 +72,5 @@ export const StyledFormField = styled.fieldset`
   label {
     font-weight: var(--bold);
     font-size: ${pxTorem(20)};
-  }
-  input[type="number"] {
-    border-radius: var(--border-radius);
-    padding: ${pxTorem(16)};
-    width: 100%;
-    border: ${pxTorem(1)} solid var(--col-400);
-  }
-  input[type="checkbox"] {
-    border-radius: var(--border-radius);
   }
 `;

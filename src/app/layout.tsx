@@ -2,14 +2,7 @@ import type { Metadata } from "next";
 import { Italianno, Poppins } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyle from "@/styles/global.styles";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import ProductsContextProvider from "@/providers/productsProvider";
-import NewsLetter from "@/components/NewsLetter";
-import FilterContextProvider from "@/providers/filterProvider";
 import Providers from "@/providers/ReduxProvider";
-import useMediaQuery from "@/hooks/useMedia";
-import MobileNav from "@/components/MobileNav";
 import { fetchProducts } from "@/utils/fetchAllProducts";
 
 const italianno = Italianno({
@@ -31,28 +24,18 @@ export const metadata: Metadata = {
   creator: "Osakwe Bonaventure Ifechukwu",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const products = await fetchProducts();
   return (
     <html lang="en">
       <body>
         <StyledComponentsRegistry>
           <Providers>
             <GlobalStyle />
-
-            <ProductsContextProvider initialProducts={products}>
-              <FilterContextProvider>
-                <Header />
-                {children}
-              </FilterContextProvider>
-            </ProductsContextProvider>
-            <NewsLetter />
-            <MobileNav />
-            <Footer />
+            {children}
           </Providers>
         </StyledComponentsRegistry>
       </body>
