@@ -1,56 +1,120 @@
 "use client";
+
+import { getUserDocument } from "@/lib/services/userService";
+import { setUser } from "@/store/slices/userSlice";
+import { AppDispatch } from "@/store/store";
 import { AuthMain, CustomButton, FlexBox } from "@/styles/components/ui.Styles";
+import { loginUser } from "@/utils/auth";
+import { FirebaseError } from "firebase/app";
 
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
 interface ERRORTYPE {
-  emailErr?: undefined | string;
+  emailErr?: string;
+  generalErr?: string;
 }
+
 const Page = () => {
   const [error, setError] = useState<ERRORTYPE>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectTo = searchParams.get("from") || "/";
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    // Clear old errors
     setError({});
+    setLoading(true);
 
     const email = (formData.get("email") as string) || "";
+    const password = (formData.get("password") as string) || "";
 
-    const newErrors: ERRORTYPE = {};
-
+    // Email validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    //email format check
+
     if (!emailRegex.test(email)) {
-      newErrors.emailErr = "Please enter a valid email";
-    }
-    // If there are any errors, update state and stop
-    if (Object.keys(newErrors).length > 0) {
-      setError(newErrors);
-      console.log(newErrors);
+      setError({ emailErr: "Please enter a valid email" });
+      setLoading(false);
       return;
     }
 
-    console.log("✅ success");
+    try {
+      // Login user
+      const user = await loginUser(email, password);
+      console.log("User logged in:", user.uid);
+
+      // Set user data
+      const userData = await getUserDocument(user.uid);
+      dispatch(setUser(userData));
+
+      // Create session cookie
+      const idToken = await user.getIdToken();
+
+      const response = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create session");
+      }
+
+      // Redirect back
+      router.push(redirectTo);
+      router.refresh();
+    } catch (err: unknown) {
+      if (err instanceof FirebaseError) {
+        if (err.code === "auth/invalid-credential") {
+          setError({ generalErr: "Incorrect email or password" });
+        } else {
+          setError({ generalErr: err.message });
+        }
+      } else {
+        setError({ generalErr: "Something went wrong. Try again." });
+      }
+    }
+
+    setLoading(false);
   }
 
   function toggleShowPassword() {
     setShowPassword((prev) => !prev);
   }
+
   return (
     <AuthMain>
       <form onSubmit={handleSubmit}>
         <div>
           <h1>Login</h1>
           <p>
-            or <Link href="/signup">Create A New Account</Link>
+            or{" "}
+            <Link
+              href={`/signup${
+                searchParams.get("from")
+                  ? `?from=${searchParams.get("from")}`
+                  : ""
+              }`}
+            >
+              Create A New Account
+            </Link>
           </p>
         </div>
-        <fieldset>
+
+        {error.generalErr && <p className="error">{error.generalErr}</p>}
+
+        <fieldset disabled={loading}>
           <div>
             <input type="email" placeholder="Email" name="email" required />
             {error.emailErr && <p className="error">{error.emailErr}</p>}
@@ -65,19 +129,23 @@ const Page = () => {
               name="password"
               required
             />
-            <button className="eye" onClick={toggleShowPassword}>
+            <button type="button" className="eye" onClick={toggleShowPassword}>
               {!showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
             </button>
           </div>
         </fieldset>
 
-        <CustomButton $variant="extended">login</CustomButton>
+        <CustomButton $variant="extended" disabled={loading}>
+          {loading ? "Logging in..." : "login"}
+        </CustomButton>
+
         <FlexBox $justifyContent="center" className="seperator">
           <div></div>
           <p>or continue with</p>
           <div></div>
         </FlexBox>
-        <button className="google" type="button">
+
+        <button className="google" type="button" disabled={loading}>
           <FaGoogle /> <p>Google</p>
         </button>
       </form>

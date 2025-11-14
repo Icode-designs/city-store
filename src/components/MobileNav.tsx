@@ -25,7 +25,7 @@ const MobileNav = () => {
           </Link>
         </li>
         <li>
-          <Link href="#">
+          <Link href="/user">
             <CgProfile />
           </Link>
         </li>

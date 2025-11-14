@@ -3,7 +3,7 @@
 import CartItemList from "@/components/CartItemList";
 import OrderSummary from "@/components/OrderSummary";
 import { StyledCartWrapper } from "@/styles/components/cart.styles";
-import { MainContainer, CustomButton } from "@/styles/components/ui.Styles";
+import { MainContainer, CustomLink } from "@/styles/components/ui.Styles";
 import React from "react";
 
 const page = () => {
@@ -13,7 +13,9 @@ const page = () => {
         <CartItemList />
         <div>
           <OrderSummary />
-          <CustomButton $variant="extended">Check Out</CustomButton>
+          <CustomLink href="/checkout" $variant="extended">
+            Check Out
+          </CustomLink>
         </div>
       </StyledCartWrapper>
     </MainContainer>

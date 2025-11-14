@@ -1,16 +1,19 @@
+// store.ts
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import storage from "redux-persist/lib/storage";
 import cartReducer from "./slices/cartSlice";
+import userReducer from "./slices/userSlice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  user: userReducer, // Changed from 'currentUser' to 'user'
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"], // only persist cart (you can add others later)
+  whitelist: ["cart", "user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -19,7 +22,9 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // required for redux-persist
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+      },
     }),
 });
 

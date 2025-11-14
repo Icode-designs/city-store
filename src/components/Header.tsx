@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  CartContainer,
-  HeaderContainer,
-  SearchResultsBox,
-} from "@/styles/components/header";
+import { HeaderContainer, SearchResultsBox } from "@/styles/components/header";
 import { FlexBox, StyledSearchBar } from "@/styles/components/ui.Styles";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
@@ -116,7 +112,10 @@ const Header = () => {
         <FlexBox $gap={32} className="menu">
           {isTablet && (
             <FlexBox $gap={24}>
-              <FaUserCircle size={24} color="var(--col-000)" />
+              <Link href="/user">
+                <FaUserCircle size={24} color="var(--col-000)" />
+              </Link>
+
               <Cart />
             </FlexBox>
           )}
