@@ -13,11 +13,8 @@ export default async function UserLayout({
   const cookieStore = await cookies();
   const session = cookieStore.get("session")?.value;
 
-  const headerObj = await headers();
-  const currentPath = headerObj.get("x-invoke-path") ?? "/";
-
   if (!session) {
-    redirect(`/login?from=${encodeURIComponent(currentPath)}`);
+    redirect(`/login?from=/user`);
   }
   const products = await fetchProducts();
   return (

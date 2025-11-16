@@ -3,7 +3,7 @@ import { Italianno, Poppins } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyle from "@/styles/global.styles";
 import Providers from "@/providers/ReduxProvider";
-import { fetchProducts } from "@/utils/fetchAllProducts";
+import ClientWrapper from "@/components/CartSyncWrapper";
 
 const italianno = Italianno({
   variable: "--font-italiano",
@@ -34,8 +34,10 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <Providers>
-            <GlobalStyle />
-            {children}
+            <ClientWrapper>
+              <GlobalStyle />
+              {children}
+            </ClientWrapper>
           </Providers>
         </StyledComponentsRegistry>
       </body>

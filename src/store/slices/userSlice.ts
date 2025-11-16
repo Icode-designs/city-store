@@ -13,6 +13,7 @@ export interface UserData {
   updatedAt?: string;
   phoneNumber?: string | null;
   address?: string;
+  favorites?: string[];
 }
 
 interface UserState {

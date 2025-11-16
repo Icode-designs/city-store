@@ -93,7 +93,7 @@ export const getUserDocument = async (
 // Update user document
 export const updateUserDocument = async (
   uid: string,
-  updates: Partial<CreateUserData>
+  updates: Partial<UserData>
 ) => {
   try {
     const userRef = doc(db, "users", uid);

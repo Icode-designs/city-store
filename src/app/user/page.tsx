@@ -4,12 +4,14 @@ import { logoutUser } from "@/utils/auth";
 import React from "react";
 import { handleLogoutAction } from "./actions";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { clearCart } from "@/store/slices/cartSlice";
 
 const Page = () => {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user.currentUser);
+  const dispatch = useDispatch();
 
   async function handleLogout() {
     try {
@@ -18,6 +20,9 @@ const Page = () => {
 
       // Log out from Firebase
       await logoutUser();
+
+      // Clear cart state
+      dispatch(clearCart());
 
       // Redirect to home
       router.push("/");
