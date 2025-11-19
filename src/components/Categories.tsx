@@ -3,6 +3,7 @@ import { CATEGORIES } from "@/utils/imageImport";
 import React from "react";
 import Card from "./Card";
 import Link from "next/link";
+import Image from "next/image";
 
 const Categories = () => {
   const categories = Object.entries(CATEGORIES);
@@ -15,7 +16,13 @@ const Categories = () => {
         {categories.map(([name, image]) => (
           <Card variant="categories" key={name}>
             <Link href={`/products/products-list/${name.toLowerCase()}`}>
-              <img src={image.src} alt={name} loading="lazy" />
+              <Image
+                width={500}
+                height={500}
+                src={image.src}
+                alt={name}
+                loading="lazy"
+              />
               <article>
                 <p>{name}</p>
               </article>

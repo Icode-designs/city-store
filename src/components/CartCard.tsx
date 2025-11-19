@@ -36,7 +36,7 @@ const CartCard = ({ item }: Props) => {
   return (
     <StyledCartCard>
       <div>
-        <img src={item.url} alt={item.title} />
+        <Image width={500} height={500} src={item.url} alt={item.title} />
       </div>
 
       <div>

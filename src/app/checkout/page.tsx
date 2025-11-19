@@ -1,10 +1,15 @@
+import CheckoutForm from "@/components/CheckoutForm";
+import { StyledCheckout } from "@/styles/components/checkout.styles";
 import { MainContainer } from "@/styles/components/ui.Styles";
 import React from "react";
 
 const page = () => {
   return (
     <MainContainer>
-      <h1>check out page</h1>
+      <StyledCheckout>
+        <h1>checkout</h1>
+        <CheckoutForm />
+      </StyledCheckout>
     </MainContainer>
   );
 };

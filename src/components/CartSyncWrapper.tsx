@@ -29,6 +29,7 @@ export default function ClientWrapper({ children }: { children: ReactNode }) {
 
       // Check if we've already merged for this session
       const hasMerged = sessionStorage.getItem("cartMerged") === "true";
+      if (remoteCart === items) return;
 
       if (!hasMerged) {
         dispatch(mergeCart(remoteCart));

@@ -73,7 +73,7 @@ h2{
     line-height: 1.3;
     text-transform: capitalize;
 }
-h3{
+h3, label{
     font-size: clamp(${pxTorem(16)},${pxTorem(18)},${pxTorem(24)});
     font-weight: var(--bold);
     line-height: 1.4;
@@ -87,7 +87,7 @@ p, li{
 
 input {
     border-radius: var(--border-radius);
-    padding: ${pxTorem(16)};
+    padding: ${pxTorem(16)} ${pxTorem(8)} ;
     width: 100%;
     border: ${pxTorem(1)} solid grey;
     transition: all ease 0.5s;

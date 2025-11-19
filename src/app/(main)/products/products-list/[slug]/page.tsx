@@ -3,31 +3,16 @@
 import Card from "@/components/Card";
 import { FILTER_CONTEXT } from "@/providers/filterProvider";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
-import { addToCart, CartItem } from "@/store/slices/cartSlice";
-import { AppDispatch } from "@/store/store";
 import { StyledProductsList } from "@/styles/components/productsList";
 import {
-  CustomButton,
   FlexBox,
   MainContainer,
   ProductsGrid,
 } from "@/styles/components/ui.Styles";
 import PRODUCT from "@/types/productsType";
-import formatToNaira from "@/utils/formatPrice";
-import { numberToStars } from "@/utils/ratings";
-import Link from "next/link";
-import React, {
-  use,
-  useContext,
-  useMemo,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import { useDispatch } from "react-redux";
+import React, { use, useContext, useMemo, useEffect, useState } from "react";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
-  const dispatch = useDispatch<AppDispatch>();
   const resolvedParams = use(params);
   const slug = resolvedParams.slug.toLowerCase();
   const normalizedSlug = slug.replace(/-/g, " ");
@@ -147,14 +132,6 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
     return [];
   }, [products, productById, categoryMatch, normalizedSlug]);
 
-  // Memoize the add to cart handler
-  const handleAddToCart = useCallback(
-    ({ title, id, price, url }: Omit<CartItem, "quantity">) => {
-      dispatch(addToCart({ title, id, url, price, quantity: 1 }));
-    },
-    [dispatch]
-  );
-
   // Loading state
   if (isLoading) {
     return (
@@ -181,28 +158,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
         ) : (
           <ProductsGrid>
             {sortedProducts.map((item) => (
-              <Card key={item.id}>
-                <Link href={`/products/product-details/${item.id}`}>
-                  <img src={item.image[0]} alt={item.title} />
-
-                  <p>{item.title}</p>
-                  <p>{numberToStars(item.rating)}</p>
-                  <h3>{formatToNaira(item.price)}</h3>
-                </Link>
-                <CustomButton
-                  onClick={() =>
-                    handleAddToCart({
-                      title: item.title,
-                      id: item.id,
-                      price: item.price,
-                      url: item.image[0],
-                    })
-                  }
-                  $variant="extended"
-                >
-                  Add to cart
-                </CustomButton>
-              </Card>
+              <Card key={item.id} product={item} />
             ))}
           </ProductsGrid>
         )}

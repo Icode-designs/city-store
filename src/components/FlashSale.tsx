@@ -1,21 +1,10 @@
 "use client";
-import {
-  CustomButton,
-  ProductSection,
-  ProductsGrid,
-} from "@/styles/components/ui.Styles";
-import formatToNaira from "@/utils/formatPrice";
-import { numberToStars } from "@/utils/ratings";
-import Link from "next/link";
+import { ProductSection, ProductsGrid } from "@/styles/components/ui.Styles";
 import Card from "./Card";
 import { useContext } from "react";
 import { PRODUCTS_CONTEXT } from "@/providers/productsProvider";
-import { addToCart, CartItem } from "@/store/slices/cartSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
 
 const FlashSale = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const productsCtx = useContext(PRODUCTS_CONTEXT);
 
   if (!productsCtx) {
@@ -24,15 +13,6 @@ const FlashSale = () => {
 
   const { products } = productsCtx;
   const saleProducts = products?.filter((product, i) => i <= 7);
-
-  const handleAddToCart = ({
-    title,
-    id,
-    price,
-    url,
-  }: Omit<CartItem, "quantity">) => {
-    dispatch(addToCart({ title, id, url, price, quantity: 1 }));
-  };
 
   return (
     <ProductSection $variant="flash-sale">
@@ -44,29 +24,7 @@ const FlashSale = () => {
       </div>
       <ProductsGrid>
         {saleProducts?.map((item, i) => (
-          <Card key={i}>
-            <Link href={`/products/product-details/${item.id}`}>
-              <img src={item.image[0]} alt={item.title} />
-              <article>
-                <p>{item.title}</p>
-                <p>{numberToStars(item.rating)}</p>
-                <h3>{formatToNaira(item.price)}</h3>
-              </article>
-            </Link>
-            <CustomButton
-              onClick={() =>
-                handleAddToCart({
-                  title: item.title,
-                  id: item.id,
-                  price: item.price,
-                  url: item.image[0],
-                })
-              }
-              $variant="extended"
-            >
-              Add to cart
-            </CustomButton>
-          </Card>
+          <Card key={i} product={item} />
         ))}
       </ProductsGrid>
     </ProductSection>

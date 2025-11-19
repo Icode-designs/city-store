@@ -10,6 +10,7 @@ import { CustomButton, FlexBox } from "@/styles/components/ui.Styles";
 import { PRODUCTS } from "@/utils/data";
 import formatToNaira from "@/utils/formatPrice";
 import { numberToStars, sumRatings } from "@/utils/ratings";
+import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -42,11 +43,21 @@ const ProductOverview = ({ product, activeImage, setActiveImage }: Props) => {
                   onClick={() => setActiveImage(i)}
                   className={i === activeImage ? "active" : ""}
                 >
-                  <img src={image} alt={product.title} />
+                  <Image
+                    width={500}
+                    height={500}
+                    src={image}
+                    alt={product.title}
+                  />
                 </div>
               ))}
             </div>
-            <img src={product.image[activeImage]} alt={product.title} />
+            <Image
+              width={500}
+              height={500}
+              src={product.image[activeImage]}
+              alt={product.title}
+            />
           </FlexBox>
         </ProductImgBox>
 

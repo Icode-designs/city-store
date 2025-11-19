@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
 import ProductsContextProvider from "@/providers/productsProvider";
@@ -23,6 +24,7 @@ export default async function checkoutLayout({
         <Header />
         {children}
         <MobileNav />
+        <Footer />
       </ProductsContextProvider>
     </>
   );

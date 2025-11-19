@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ng.jumia.is", // 👈 allow Jumia product images
+        hostname: "**",
       },
     ],
   },
